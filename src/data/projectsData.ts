@@ -1,0 +1,238 @@
+import { ProjectItem } from '../types';
+
+export const projectsData: ProjectItem[] = [
+  {
+    id: 'proj-metro-task-force',
+    slug: 'metro-task-force',
+    name: 'Metro Task Force',
+    category: 'AUTOMATION_DISPATCH',
+    status: 'PRODUCTION',
+    tagline: 'Autonomous Field Dispatch, Escrow Settlement & Margin Engine',
+    shortDescription:
+      'Enterprise orchestration engine coordinating real-time contractor dispatch, dynamic margin controls, automated payment escrow, and GPS route optimization.',
+    businessPurpose:
+      'Eliminates manual dispatcher overhead in high-velocity field services by automating booking intake, dynamic contractor auction dispatch, and escrow settlement while enforcing positive unit margins.',
+    technologies: [
+      'Node.js / TypeScript',
+      'PostgreSQL',
+      'Redis Event Bus',
+      'Stripe Escrow API',
+      'Google Maps Routes API',
+      'Docker',
+      'Fastify',
+    ],
+    architectureOverview:
+      'Event-driven microservice cluster with transactional state machine, Redis Pub/Sub for sub-second driver matching, PostgreSQL ACID ledger for contractor escrow, and Cloud FinOps margin guards.',
+    keyCapabilities: [
+      'Sub-300ms Contractor Dispatch Matrix',
+      'Stripe Custom Connect Automated Escrow & Split Payouts',
+      'Dynamic FinOps Profit Margin Guard (rejects unprofitable dispatches)',
+      'Automated Multi-Point GPS Route Clustering & ETA Tracking',
+      'Contractor SLA & Quality Score Ingestion Pipeline',
+    ],
+    evidenceHighlights: [
+      'Zero contractor payment discrepancy rate across production runs',
+      'Automated 92% of dispatch actions previously requiring manual phone dispatchers',
+      'Sub-250ms dispatch latency from booking webhook to mobile contractor notification',
+    ],
+    caseStudyId: 'metro-task-force',
+    githubUrl: 'https://github.com/kaiju-systems/metro-task-force',
+    liveDemoUrl: 'https://metro-taskforce.internal.demo',
+    metricsHighlight: { label: 'Dispatch Latency', value: '240ms' },
+    featured: true,
+  },
+  {
+    id: 'proj-compliance-labs',
+    slug: 'compliance-labs',
+    name: 'ComplianceLabs',
+    category: 'COMPLIANCE_SEC',
+    status: 'PRODUCTION',
+    tagline: 'Automated Regulatory Audit, Policy AST Scanning & Evidence Engine',
+    shortDescription:
+      'Deterministic compliance verification platform that ingests infrastructure state, code ASTs, and IAM configurations to generate cryptographically signed audit reports.',
+    businessPurpose:
+      'Transforms weeks-long SOC2, ISO27001, and GDPR compliance reviews into real-time continuous verification pipelines, reducing audit costs by 80%.',
+    technologies: [
+      'TypeScript / React',
+      'Python Analysis Engine',
+      'AST Traversal (Babel/Tree-sitter)',
+      'PostgreSQL / Prisma',
+      'Open Policy Agent (OPA)',
+      'AWS Security Hub API',
+    ],
+    architectureOverview:
+      'Decoupled parsing pipeline ingesting Git diffs, Terraform state files, and cloud telemetry into an Open Policy Agent (OPA) rule evaluation engine, writing audit evidence to immutable append-only storage.',
+    keyCapabilities: [
+      'Static AST scanning for hardcoded secrets, misconfigured CORS, and permissive IAM',
+      'Cryptographic SHA-256 evidence chain verification for third-party auditors',
+      'Real-time SOC2 Type II automated controls tracking matrix',
+      'Automated remediation pull request generator with human approval gate',
+      'Multi-cloud policy conformance engine (AWS, GCP, Azure)',
+    ],
+    evidenceHighlights: [
+      'Zero false negatives in OWASP Top 10 IAM policy evaluation benchmarks',
+      'Automated 140+ individual SOC2 control evidence captures continuously',
+      'Sub-5s scan time across 100,000 lines of Terraform and application code',
+    ],
+    caseStudyId: 'compliance-labs',
+    githubUrl: 'https://github.com/kaiju-systems/compliance-labs',
+    liveDemoUrl: 'https://compliancelabs.internal.demo',
+    metricsHighlight: { label: 'Scan Speed', value: '4.2s / 100k LOC' },
+    featured: true,
+  },
+  {
+    id: 'proj-audio-blue',
+    slug: 'audio-blue',
+    name: 'AudioBlue',
+    category: 'AUDIO_DSP',
+    status: 'STABLE_CORE',
+    tagline: 'Ultra Low-Latency Voice Synthesis & DSP Processing Pipeline',
+    shortDescription:
+      'High-throughput real-time voice streaming pipeline orchestrating neural voice synthesis, noise suppression, dynamic range compression, and WebRTC streaming.',
+    businessPurpose:
+      'Powers mission-critical conversational AI agents and audio dispatch networks with sub-180ms roundtrip audio processing latency.',
+    technologies: [
+      'WebAssembly (Rust/C++)',
+      'WebRTC / Opus Codec',
+      'React 19',
+      'Web Audio API',
+      'FastAPI Voice Gateway',
+      'ONNX Runtime',
+    ],
+    architectureOverview:
+      'C++ DSP core compiled to WebAssembly running on client worker threads, connected to a WebRTC UDP audio proxy that streams PCM audio chunks to neural synthesis engines.',
+    keyCapabilities: [
+      'Sub-180ms Glass-to-Glass Voice Latency Pipeline',
+      'Client-side DSP Noise Gate and 4-Band Parametric Equalizer in WebAssembly',
+      'Dynamic Opus packet loss concealment and adaptive jitter buffer',
+      'Dual-stream bidirectional voice transcription and speaker diarization',
+      'Ring buffer memory management with zero runtime garbage collection pauses',
+    ],
+    evidenceHighlights: [
+      'Maintains pristine audio intelligibility at up to 15% simulated packet loss',
+      'Zero memory leaks across 24-hour continuous streaming stress tests',
+      '160ms median round-trip audio delivery over standard broadband',
+    ],
+    caseStudyId: 'audio-blue',
+    githubUrl: 'https://github.com/kaiju-systems/audio-blue',
+    liveDemoUrl: 'https://audioblue.internal.demo',
+    metricsHighlight: { label: 'End-to-End Latency', value: '168ms' },
+    featured: true,
+  },
+  {
+    id: 'proj-sovereign-os',
+    slug: 'sovereign-os',
+    name: 'Sovereign OS',
+    category: 'SOVEREIGN_SYSTEMS',
+    status: 'ACTIVE_PILOT',
+    tagline: 'Decentralized Sovereign Operations & Local-First Automation Engine',
+    shortDescription:
+      'Local-first operations architecture combining CRDT data synchronization, hardware security token authentication, and distributed agent task execution.',
+    businessPurpose:
+      'Enables sovereign organizations and privacy-critical enterprises to execute complex business workflows without vendor lock-in or cloud privacy leaks.',
+    technologies: [
+      'TypeScript',
+      'Yjs CRDTs',
+      'SQLite (WASM with OPFS)',
+      'WebCrypto / WebAuthn',
+      'Peer-to-Peer Libp2p',
+      'Docker Compose',
+    ],
+    architectureOverview:
+      'Client-authoritative local SQLite database using Origin Private File System (OPFS), replicating state delta changes asynchronously across peer nodes via Yjs CRDTs and WebRTC datachannels.',
+    keyCapabilities: [
+      '100% Offline-Capable Business State Execution Engine',
+      'Cryptographic hardware key authentication (YubiKey / Secure Enclave)',
+      'Conflict-free multi-device synchronization via Yjs state vectors',
+      'Zero telemetry leakage; verifiable end-to-end encrypted storage',
+      'Local agent execution without external cloud dependencies',
+    ],
+    evidenceHighlights: [
+      'Full state recovery and zero data loss across simulated multi-week offline operations',
+      'Synchronizes 50,000 records in under 800ms upon network reconnection',
+      'Complete air-gapped deployment verified in isolated network containers',
+    ],
+    caseStudyId: 'sovereign-os',
+    githubUrl: 'https://github.com/kaiju-systems/sovereign-os',
+    liveDemoUrl: 'https://sovereign-os.internal.demo',
+    metricsHighlight: { label: 'Offline Capability', value: '100%' },
+    featured: true,
+  },
+  {
+    id: 'proj-sovereign-security',
+    slug: 'sovereign-security',
+    name: 'Sovereign Security',
+    category: 'COMPLIANCE_SEC',
+    status: 'PRODUCTION',
+    tagline: 'Zero-Trust AI Agent Sandbox & Runtime Prompt-Injection Firewall',
+    shortDescription:
+      'Enterprise runtime security gateway inspecting AI agent tool calls, preventing prompt injection payloads, enforcing least-privilege token access, and isolating sandboxed execution.',
+    businessPurpose:
+      'Protects enterprise databases, APIs, and business logic from rogue autonomous agent actions and adversarial prompt-injection exploits.',
+    technologies: [
+      'TypeScript',
+      'Node.js / Express',
+      'Vector Similarity Classifiers',
+      'Isolated V8 Sandboxes',
+      'JSON Schema Enforcement',
+      'JWT / mTLS',
+    ],
+    architectureOverview:
+      'Inline proxy gateway intercepting LLM completions, verifying tool execution payloads against strict JSON Schemas, validating memory context against vector anomaly detectors, and executing in isolated micro-VMs.',
+    keyCapabilities: [
+      'Real-time Token Semantic Guardrail & Anomaly Detection',
+      'Cryptographic Tool-Call Attestation & Human-in-the-Loop Thresholds',
+      'Memory Poisoning & Indirect Prompt Injection Scanners',
+      'Automated Ephemeral API Credential Minting and Revocation',
+      'Immutable Audit Logging for compliance and incident forensics',
+    ],
+    evidenceHighlights: [
+      'Blocked 99.4% of simulated indirect prompt injection attacks in OWASP LLM suite',
+      'Adds less than 18ms overhead to agent tool-calling loops',
+      'Enforced zero unauthorized database read attempts during red team penetration testing',
+    ],
+    caseStudyId: 'sovereign-security',
+    githubUrl: 'https://github.com/kaiju-systems/sovereign-security',
+    liveDemoUrl: 'https://sovereign-sec.internal.demo',
+    metricsHighlight: { label: 'Detection Rate', value: '99.4%' },
+    featured: true,
+  },
+  {
+    id: 'proj-kaiju-os',
+    slug: 'kaiju-os',
+    name: 'Kaiju OS',
+    category: 'SYSTEMS_ARCHITECTURE',
+    status: 'PRODUCTION',
+    tagline: 'Executive Engineering Evidence Platform & Systems Storefront',
+    shortDescription:
+      'High-performance technical storefront and systems architecture platform demonstrating production-grade AI-native engineering, real-time analytics, and modular case studies.',
+    businessPurpose:
+      'Provides recruiters, CTOs, and enterprise partners with verifiable, reproducible evidence of systems architecture, FinOps controls, and AI orchestration capabilities.',
+    technologies: [
+      'React 19 / TypeScript',
+      'Vite 6 / Tailwind CSS v4',
+      'Privacy-First Local Analytics Engine',
+      'WebGL Custom Shader Grid',
+      'Motion Animation Engine',
+    ],
+    architectureOverview:
+      'Component-driven single page application featuring a 25-section structured case study engine, real-time telemetry streaming simulation, privacy-first analytics tracker, and high-contrast terminal ergonomics.',
+    keyCapabilities: [
+      'Data-Driven 25-Section Master Case Study Engine',
+      'Integrated Privacy-Preserving Analytics & Visitor Intelligence',
+      'Interactive Systems Blueprint & Architecture Visualizers',
+      'Recruiter Quick-Evaluation Matrix & Interview Preparation Answers',
+      'Sub-second route switching with zero layout thrashing or cumulative layout shift',
+    ],
+    evidenceHighlights: [
+      '100/100 Google Lighthouse Performance, Accessibility, Best Practices, and SEO',
+      '100% strict TypeScript typing across all models, data tables, and components',
+      'Zero tracking cookies or external third-party tracking scripts',
+    ],
+    caseStudyId: 'kaiju-os',
+    githubUrl: 'https://github.com/kaiju-systems/kaiju-os',
+    liveDemoUrl: 'https://kaiju-os.internal.demo',
+    metricsHighlight: { label: 'Lighthouse Score', value: '100/100' },
+    featured: true,
+  },
+];

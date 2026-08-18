@@ -1,6 +1,19 @@
 import React from 'react';
 import { ScreenId } from '../types';
-import { Search, Terminal, Settings, Activity, ShieldCheck } from 'lucide-react';
+import {
+  Search,
+  Terminal,
+  Settings,
+  Activity,
+  ShieldCheck,
+  FileText,
+  Briefcase,
+  Layers,
+  Cpu,
+  TrendingUp,
+  Github,
+  Mail,
+} from 'lucide-react';
 
 interface TopNavProps {
   currentScreen: ScreenId;
@@ -23,59 +36,71 @@ export const TopNav: React.FC<TopNavProps> = ({
   setQueryFilter,
   systemStatus,
 }) => {
-  const navTabs: { id: ScreenId; label: string }[] = [
-    { id: 'SYSTEM', label: 'SYSTEM' },
-    { id: 'NODES', label: 'NODES' },
-    { id: 'SENSORS', label: 'SENSORS' },
-    { id: 'LOGS', label: 'LOGS' },
+  const navTabs: { id: ScreenId; label: string; badge?: string }[] = [
+    { id: 'HOME', label: 'OVERVIEW' },
+    { id: 'PROJECTS', label: 'PROJECTS' },
+    { id: 'CASE_STUDIES', label: 'CASE STUDIES', badge: '25-SEC' },
+    { id: 'ARCHITECTURE', label: 'ARCHITECTURE' },
+    { id: 'SKILLS', label: 'SKILLS' },
+    { id: 'EXPERIENCE', label: 'EXPERIENCE' },
+    { id: 'ANALYTICS', label: 'ANALYTICS' },
+    { id: 'GITHUB', label: 'GITHUB' },
+    { id: 'CONTACT', label: 'CONTACT' },
   ];
 
   return (
     <header
       id="kaiju-header"
-      className="fixed top-0 left-0 w-full z-40 bg-[#131313]/85 backdrop-blur-xl border-b border-white/10 flex justify-between items-center h-16 px-4 md:px-10 transition-colors"
+      className="fixed top-0 left-0 w-full z-40 bg-[#0a0f16]/90 backdrop-blur-xl border-b border-white/10 flex justify-between items-center h-16 px-4 md:px-8 transition-colors"
     >
-      <div className="flex items-center gap-6 md:gap-10">
+      <div className="flex items-center gap-4 lg:gap-8">
         <button
           id="btn-brand-logo"
-          onClick={() => onSelectScreen('SYSTEM')}
-          className="flex items-center gap-2 text-left group focus:outline-none"
+          onClick={() => onSelectScreen('HOME')}
+          className="flex items-center gap-2 text-left group focus:outline-none cursor-pointer"
         >
           <div className="w-2.5 h-2.5 rounded-full bg-[#4edea3] group-hover:scale-125 transition-transform animate-pulse shadow-[0_0_8px_#4edea3]" />
-          <span className="font-bold text-xl md:text-2xl tracking-tighter text-[#e5e2e1] group-hover:text-white font-mono-tech transition-colors">
+          <span className="font-bold text-lg md:text-xl tracking-tighter text-[#e5e2e1] group-hover:text-white font-mono transition-colors">
             KAIJU_OS
           </span>
-          <span className="text-[10px] text-[#98cbff] px-1.5 py-0.5 rounded bg-[#98cbff]/10 border border-[#98cbff]/20 font-mono-tech hidden sm:inline-block">
-            L0_CORE
+          <span className="text-[10px] text-[#98cbff] px-1.5 py-0.5 rounded bg-[#98cbff]/10 border border-[#98cbff]/20 font-mono hidden sm:inline-block">
+            V2.5_EVIDENCE
           </span>
         </button>
 
         {/* Screen Switcher Tabs */}
-        <nav id="top-nav-screens" className="hidden md:flex items-center gap-2">
+        <nav id="top-nav-screens" className="hidden xl:flex items-center gap-1">
           {navTabs.map((tab) => {
-            const isActive = currentScreen === tab.id;
+            const isActive =
+              currentScreen === tab.id ||
+              (tab.id === 'HOME' && currentScreen === 'SYSTEM');
             return (
               <button
                 key={tab.id}
                 id={`tab-nav-${tab.id.toLowerCase()}`}
                 onClick={() => onSelectScreen(tab.id)}
-                className={`font-mono-tech text-xs tracking-wider px-3 py-1.5 rounded transition-all duration-200 cursor-pointer ${
+                className={`relative font-mono text-[11px] tracking-wider px-2.5 py-1.5 rounded-lg transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
                   isActive
-                    ? 'text-[#4edea3] border-b-2 border-[#4edea3] bg-[#4edea3]/5 font-semibold'
-                    : 'text-[#bec7d4] hover:text-[#e5e2e1] hover:bg-white/5'
+                    ? 'text-[#98cbff] bg-[#98cbff]/15 font-bold border border-[#98cbff]/30 shadow-[0_0_12px_rgba(152,203,255,0.15)]'
+                    : 'text-[#9cb1c9] hover:text-white hover:bg-white/5'
                 }`}
               >
-                {tab.label}
+                <span>{tab.label}</span>
+                {tab.badge && (
+                  <span className="rounded bg-[#4edea3]/20 px-1 py-0.2 text-[9px] font-bold text-[#4edea3] border border-[#4edea3]/30">
+                    {tab.badge}
+                  </span>
+                )}
               </button>
             );
           })}
         </nav>
       </div>
 
-      <div className="flex items-center gap-3 md:gap-4">
+      <div className="flex items-center gap-2 sm:gap-3">
         {/* Search input with shortcut */}
-        <div className="relative hidden sm:block">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#88919d] w-3.5 h-3.5 pointer-events-none" />
+        <div className="relative hidden md:block">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#5c7287] w-3.5 h-3.5 pointer-events-none" />
           <input
             id="input-query-core"
             type="text"
@@ -86,12 +111,12 @@ export const TopNav: React.FC<TopNavProps> = ({
                 onOpenCommandPalette();
               }
             }}
-            placeholder="QUERY_CORE..."
-            className="bg-black/90 border border-[#3f4852] rounded-lg pl-8 pr-12 py-1.5 text-xs text-[#e5e2e1] placeholder-[#88919d] font-mono-tech focus:border-[#98cbff] focus:ring-1 focus:ring-[#98cbff] focus:outline-none w-44 md:w-56 transition-all"
+            placeholder="Search systems & evidence..."
+            className="bg-[#05080c] border border-[#223142] rounded-lg pl-8 pr-12 py-1.5 text-xs text-[#e5e2e1] placeholder-[#5c7287] font-mono focus:border-[#98cbff] focus:ring-1 focus:ring-[#98cbff] focus:outline-none w-44 lg:w-56 transition-all"
           />
           <kbd
             onClick={onOpenCommandPalette}
-            className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[9px] text-[#88919d] bg-white/10 px-1.5 py-0.5 rounded border border-white/10 font-mono-tech cursor-pointer hover:text-white"
+            className="absolute right-2 top-1/2 -translate-y-1/2 text-[9px] text-[#88919d] bg-white/10 px-1.5 py-0.5 rounded border border-white/10 font-mono cursor-pointer hover:text-white"
           >
             ⌘K
           </kbd>
@@ -101,44 +126,28 @@ export const TopNav: React.FC<TopNavProps> = ({
         <button
           id="btn-mobile-search"
           onClick={onOpenCommandPalette}
-          className="sm:hidden text-[#bec7d4] hover:text-[#e5e2e1] p-2 rounded hover:bg-white/5 transition-all"
+          className="md:hidden text-[#bec7d4] hover:text-white p-2 rounded hover:bg-white/5 transition-all"
           title="Search / Command Palette"
         >
           <Search className="w-4 h-4" />
         </button>
 
-        {/* Terminal quick-drawer trigger */}
+        {/* Quick Case Study trigger */}
         <button
-          id="btn-toggle-terminal-drawer"
-          onClick={onOpenTerminalDrawer}
-          className="text-[#bec7d4] hover:text-[#98cbff] p-2 rounded hover:bg-white/5 transition-all cursor-pointer relative group"
-          title="Open Terminal Stdin (CMD+`)"
+          onClick={() => onSelectScreen('CASE_STUDIES')}
+          className="hidden sm:inline-flex items-center gap-1.5 rounded-lg bg-[#98cbff]/10 border border-[#98cbff]/30 px-2.5 py-1 text-xs font-mono text-[#98cbff] hover:bg-[#98cbff] hover:text-[#001f3f] transition-all cursor-pointer"
         >
-          <Terminal className="w-4 h-4" />
-          <span className="absolute -bottom-1 -right-1 w-1.5 h-1.5 rounded-full bg-[#98cbff] group-hover:animate-ping" />
+          <FileText className="w-3.5 h-3.5" />
+          <span>Case Studies</span>
         </button>
 
-        {/* Live cluster indicator */}
-        <div
-          id="chip-system-health"
-          onClick={() => onSelectScreen('SENSORS')}
-          className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#1c1b1b] border border-white/5 text-[11px] font-mono-tech text-[#bec7d4] hover:border-[#4edea3]/40 cursor-pointer transition-colors"
-          title="Cluster US-EAST Health"
-        >
-          <Activity className="w-3 h-3 text-[#4edea3]" />
-          <span className="text-[#4edea3]">14ms</span>
-          <span className="text-[#88919d]">|</span>
-          <span>US_CLUSTER_01</span>
-        </div>
-
-        {/* Settings button */}
+        {/* Contact CTA */}
         <button
-          id="btn-top-settings"
-          onClick={onOpenSettings}
-          className="text-[#bec7d4] hover:text-[#e5e2e1] p-2 rounded hover:bg-white/5 transition-all cursor-pointer"
-          title="System Settings & Security (L4_USER)"
+          onClick={() => onSelectScreen('CONTACT')}
+          className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-[#98cbff] to-[#76aae6] px-3 py-1.5 text-xs font-mono font-bold text-[#001f3f] hover:opacity-90 transition-all cursor-pointer shadow-md shadow-[#98cbff]/10"
         >
-          <Settings className="w-4 h-4" />
+          <Mail className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">Contact</span>
         </button>
       </div>
     </header>

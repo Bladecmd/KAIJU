@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { ScreenId } from '../types';
 import {
   Boxes,
+  Briefcase,
+  FileText,
+  Layers,
   Cpu,
-  Database,
-  GitFork,
-  Fingerprint,
+  GraduationCap,
+  Activity,
+  Github,
+  Mail,
   Power,
   Command,
   ChevronRight,
@@ -34,34 +38,58 @@ export const SideNav: React.FC<SideNavProps> = ({
     icon: React.ReactNode;
   }[] = [
     {
-      id: 'SYSTEM',
+      id: 'HOME',
       layer: 'L0_CORE',
-      label: 'Core Dashboard',
-      icon: <Boxes className="w-5 h-5 shrink-0" />,
+      label: 'Overview & Telemetry',
+      icon: <Boxes className="w-4 h-4 shrink-0" />,
     },
     {
-      id: 'NODES',
-      layer: 'L1_AUTO',
-      label: 'Automation Pipelines',
-      icon: <Cpu className="w-5 h-5 shrink-0" />,
+      id: 'PROJECTS',
+      layer: 'L1_PROJ',
+      label: 'Systems Catalog',
+      icon: <Briefcase className="w-4 h-4 shrink-0" />,
     },
     {
-      id: 'SENSORS',
-      layer: 'L2_DATA',
-      label: 'Telemetry & Grid',
-      icon: <Database className="w-5 h-5 shrink-0" />,
+      id: 'CASE_STUDIES',
+      layer: 'L2_CASE',
+      label: '25-Sec Case Studies',
+      icon: <FileText className="w-4 h-4 shrink-0" />,
     },
     {
-      id: 'LOGS',
-      layer: 'L3_FLOW',
-      label: 'Event Streams',
-      icon: <GitFork className="w-5 h-5 shrink-0" />,
+      id: 'ARCHITECTURE',
+      layer: 'L3_ARCH',
+      label: 'System Blueprints',
+      icon: <Layers className="w-4 h-4 shrink-0" />,
     },
     {
-      id: 'USER',
-      layer: 'L4_USER',
-      label: 'Security & Access',
-      icon: <Fingerprint className="w-5 h-5 shrink-0" />,
+      id: 'SKILLS',
+      layer: 'L4_SKIL',
+      label: 'Competency Matrix',
+      icon: <Cpu className="w-4 h-4 shrink-0" />,
+    },
+    {
+      id: 'EXPERIENCE',
+      layer: 'L5_EXPR',
+      label: 'Track Record & Phil.',
+      icon: <GraduationCap className="w-4 h-4 shrink-0" />,
+    },
+    {
+      id: 'ANALYTICS',
+      layer: 'L6_METR',
+      label: 'Platform Analytics',
+      icon: <Activity className="w-4 h-4 shrink-0" />,
+    },
+    {
+      id: 'GITHUB',
+      layer: 'L7_REPO',
+      label: 'Public Source Repos',
+      icon: <Github className="w-4 h-4 shrink-0" />,
+    },
+    {
+      id: 'CONTACT',
+      layer: 'L8_COMM',
+      label: 'Engineering Inbound',
+      icon: <Mail className="w-4 h-4 shrink-0" />,
     },
   ];
 
@@ -70,56 +98,58 @@ export const SideNav: React.FC<SideNavProps> = ({
       id="kaiju-sidenav"
       className={`fixed left-0 top-0 h-full ${
         isLocked ? 'w-64' : 'w-16 md:w-20 hover:w-64'
-      } transition-all duration-300 z-40 bg-[#0e0e0e]/95 backdrop-blur-xl border-r border-white/5 shadow-2xl flex flex-col py-6 group`}
+      } transition-all duration-300 z-40 bg-[#070b10]/95 backdrop-blur-xl border-r border-[#1c2736] shadow-2xl flex flex-col py-5 group`}
     >
       {/* Top Profile / ADM Badge */}
       <div
         id="sidenav-user-profile"
-        onClick={() => onSelectScreen('USER')}
-        className="px-3 md:px-5 mb-8 flex items-center gap-3.5 cursor-pointer"
-        title="Admin Profile (L4_USER)"
+        onClick={() => onSelectScreen('HOME')}
+        className="px-3 md:px-4 mb-4 flex items-center gap-3 cursor-pointer"
+        title="Kaiju OS Systems Architect"
       >
-        <div className="w-9 h-9 rounded-xl bg-[#00a3ff]/20 border border-[#00a3ff]/40 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-[0_0_12px_rgba(0,163,255,0.25)]">
-          <Fingerprint className="w-5 h-5 text-[#98cbff]" />
+        <div className="w-9 h-9 rounded-xl bg-[#98cbff]/10 border border-[#98cbff]/30 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-[0_0_12px_rgba(152,203,255,0.15)]">
+          <ShieldCheck className="w-5 h-5 text-[#98cbff]" />
         </div>
         <div className="overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
           <div className="flex items-center gap-1.5">
-            <p className="font-mono-tech text-xs text-[#e5e2e1] font-bold tracking-tight">
-              ADM_KAIJU
+            <p className="font-mono text-xs text-[#e5e2e1] font-bold tracking-tight">
+              ARCHITECT_ADM
             </p>
-            <ShieldCheck className="w-3 h-3 text-[#4edea3]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#4edea3]" />
           </div>
-          <p className="text-[10px] text-[#88919d] font-mono-tech tracking-tighter">
-            V.2.0.4_STABLE
+          <p className="text-[10px] text-[#71879c] font-mono tracking-tighter">
+            AI-NATIVE SYSTEMS
           </p>
         </div>
       </div>
 
       {/* Layer Navigation */}
-      <nav id="sidenav-nav-links" className="flex-1 space-y-2 px-2">
+      <nav id="sidenav-nav-links" className="flex-1 space-y-1 px-2 overflow-y-auto">
         {menuItems.map((item) => {
-          const isActive = currentScreen === item.id;
+          const isActive =
+            currentScreen === item.id ||
+            (item.id === 'HOME' && currentScreen === 'SYSTEM');
           return (
             <button
               key={item.id}
               id={`sidenav-item-${item.layer.toLowerCase()}`}
               onClick={() => onSelectScreen(item.id)}
-              className={`w-full flex items-center gap-3.5 px-3 md:px-3.5 py-3 rounded-xl cursor-pointer transition-all duration-200 text-left ${
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer transition-all duration-200 text-left ${
                 isActive
-                  ? 'bg-[#00a3ff] text-[#001d33] font-semibold shadow-[0_0_16px_rgba(0,163,255,0.35)]'
-                  : 'text-[#bec7d4] hover:text-[#e5e2e1] hover:bg-[#201f1f]'
+                  ? 'bg-[#98cbff] text-[#001f3f] font-bold shadow-[0_0_16px_rgba(152,203,255,0.3)]'
+                  : 'text-[#8ca3b8] hover:text-white hover:bg-[#121c28]'
               }`}
             >
-              <div className={isActive ? 'text-[#001d33]' : 'text-[#bec7d4]'}>
+              <div className={isActive ? 'text-[#001f3f]' : 'text-[#8ca3b8]'}>
                 {item.icon}
               </div>
               <div className="overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap leading-tight">
-                <p className="font-mono-tech text-xs font-bold tracking-wide">
+                <p className="font-mono text-xs font-bold tracking-wide">
                   {item.layer}
                 </p>
                 <p
                   className={`text-[10px] truncate ${
-                    isActive ? 'text-[#00375a]' : 'text-[#88919d]'
+                    isActive ? 'text-[#002d59]' : 'text-[#5a7185]'
                   }`}
                 >
                   {item.label}
@@ -134,29 +164,27 @@ export const SideNav: React.FC<SideNavProps> = ({
       </nav>
 
       {/* Bottom controls */}
-      <div className="mt-auto px-3 md:px-4 pt-4 border-t border-white/5 space-y-2">
-        {/* Power Off / Restart */}
-        <button
-          id="btn-sidenav-power"
-          onClick={onOpenPowerModal}
-          className="w-full flex items-center gap-3.5 px-3 py-2.5 text-[#bec7d4] hover:text-[#ffb4ab] hover:bg-[#ffb4ab]/10 rounded-lg transition-colors cursor-pointer text-left"
-          title="System State / Reboot"
-        >
-          <Power className="w-5 h-5 shrink-0" />
-          <span className="font-mono-tech text-xs opacity-0 group-hover:opacity-100 whitespace-nowrap uppercase tracking-wider">
-            SYSTEM_POWER
-          </span>
-        </button>
-
+      <div className="mt-auto px-2 pt-3 border-t border-[#1c2736] space-y-1.5">
         {/* Quick CMD+K trigger */}
         <button
           id="btn-sidenav-cmdk"
           onClick={onOpenCommandPalette}
-          className="w-full px-2 py-1.5 bg-white/5 hover:bg-white/10 rounded border border-white/10 text-center opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1.5 cursor-pointer"
+          className="w-full px-2 py-1.5 bg-[#0e1722] hover:bg-[#152334] rounded-lg border border-[#223142] text-center opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1.5 cursor-pointer font-mono"
         >
           <Command className="w-3 h-3 text-[#98cbff]" />
-          <span className="font-mono-tech text-[11px] text-[#88919d] tracking-widest">
-            CMD+K
+          <span className="text-[11px] text-[#88919d]">⌘K SEARCH</span>
+        </button>
+
+        {/* System State */}
+        <button
+          id="btn-sidenav-power"
+          onClick={onOpenPowerModal}
+          className="w-full flex items-center gap-3 px-3 py-2 text-[#8ca3b8] hover:text-[#ffb4ab] hover:bg-[#ffb4ab]/10 rounded-lg transition-colors cursor-pointer text-left font-mono"
+          title="System State / Reboot"
+        >
+          <Power className="w-4 h-4 shrink-0" />
+          <span className="text-xs opacity-0 group-hover:opacity-100 whitespace-nowrap uppercase tracking-wider">
+            KERNEL_REBOOT
           </span>
         </button>
       </div>
