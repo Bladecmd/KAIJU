@@ -7,8 +7,8 @@ export const sovereignSecurityCaseStudy: CaseStudyData = {
   // 01 - PROJECT IDENTITY
   identity: {
     projectName: 'Sovereign Security',
-    projectType: 'Zero-Trust AI Agent Sandbox & Runtime Prompt-Injection Firewall',
-    status: 'PRODUCTION (AI Security Gateway)',
+    projectType: 'Defensive Security Governance, Zero-Trust Access & AI Prompt Firewall',
+    status: 'DEVELOPMENT (Defensive AI Security Architecture)',
     myRole: 'Founder, AI Security Architect & Lead Systems Engineer',
     technologyStack: [
       'TypeScript 5.8 / Node.js',

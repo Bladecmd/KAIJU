@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { ScreenId } from '../../types';
-import { projectsData } from '../../data/projectsData';
 import { allCaseStudies } from '../../data/caseStudies';
+import { accessControl } from '../../services/accessControl';
+import { getTechnicalBrief } from '../../data/technicalBriefsData';
+import { TechnicalBriefModal } from '../TechnicalBriefModal';
+import { TechnicalBriefViewer } from '../TechnicalBriefViewer';
 import {
   Layers,
   ArrowUpRight,
@@ -9,6 +12,7 @@ import {
   Database,
   Cpu,
   Lock,
+  Unlock,
   Zap,
   ShieldCheck,
   TrendingUp,
@@ -23,22 +27,38 @@ interface ArchitectureScreenProps {
 
 export const ArchitectureScreen: React.FC<ArchitectureScreenProps> = ({ onSelectScreen }) => {
   const [selectedSystem, setSelectedSystem] = useState<string>('metro-task-force');
+  const [isBriefModalOpen, setIsBriefModalOpen] = useState(false);
+  const [isViewingBrief, setIsViewingBrief] = useState(false);
 
   const activeStudy = allCaseStudies.find((c) => c.slug === selectedSystem) || allCaseStudies[0];
+  const technicalBrief = getTechnicalBrief(selectedSystem);
+  const hasUnlockedBrief = accessControl.hasAccess(selectedSystem);
 
   return (
     <div className="space-y-8 animate-fadeIn">
+      {/* Technical Brief Modal */}
+      <TechnicalBriefModal
+        isOpen={isBriefModalOpen}
+        onClose={() => setIsBriefModalOpen(false)}
+        projectSlug={selectedSystem}
+        projectName={activeStudy.identity.projectName}
+        onAccessGranted={() => {
+          setIsBriefModalOpen(false);
+          setIsViewingBrief(true);
+        }}
+      />
+
       {/* Header */}
       <div className="border-b border-[#1c2736] pb-6 space-y-2">
         <div className="inline-flex items-center gap-2 rounded-full border border-[#98cbff]/30 bg-[#98cbff]/10 px-3 py-1 text-xs font-mono text-[#98cbff]">
           <Layers className="h-3.5 w-3.5" />
-          SYSTEM_BLUEPRINTS // ARCHITECTURAL TOPOLOGY & EVENT FLOWS
+          SYSTEM_BLUEPRINTS // PROGRESSIVE DISCLOSURE ARCHITECTURE
         </div>
         <h1 className="text-2xl md:text-3xl font-bold text-white font-mono">
           System Architecture Explorer
         </h1>
         <p className="text-sm text-[#a3b1c2]">
-          Deep architectural specifications, state machine topologies, double-entry financial ledgers, and zero-trust security perimeters.
+          Public system topologies, state machine invariants, double-entry financial ledgers, and zero-trust security perimeters.
         </p>
       </div>
 
@@ -59,24 +79,57 @@ export const ArchitectureScreen: React.FC<ArchitectureScreenProps> = ({ onSelect
         ))}
       </div>
 
-      {/* Active System Topology */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Topology Card */}
-        <div className="lg:col-span-8 rounded-2xl border border-[#223142] bg-[#0c131d]/90 p-6 md:p-8 space-y-6">
-          <div className="flex items-center justify-between flex-wrap gap-2 border-b border-[#1c2736] pb-4">
-            <div>
-              <h2 className="text-xl font-bold text-white font-mono">
-                {activeStudy.identity.projectName} // Topology
-              </h2>
-              <p className="text-xs font-mono text-[#98cbff] mt-0.5">{activeStudy.identity.projectType}</p>
-            </div>
-            <button
-              onClick={() => onSelectScreen('CASE_STUDIES', activeStudy.slug)}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-[#142232] border border-[#98cbff]/30 px-3 py-1.5 text-xs font-mono text-[#98cbff] hover:bg-[#98cbff] hover:text-[#001f3f] transition-all"
-            >
-              Full 25-Section Case Study <ArrowUpRight className="h-3.5 w-3.5" />
-            </button>
-          </div>
+      {/* If User Is Actively Viewing Unlocked Level 2 Brief */}
+      {isViewingBrief && technicalBrief ? (
+        <TechnicalBriefViewer
+          brief={technicalBrief}
+          onBackToCaseStudy={() => setIsViewingBrief(false)}
+          onContactBlade={() => onSelectScreen('CONTACT')}
+        />
+      ) : (
+        <>
+          {/* Active System Topology */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {/* Topology Card */}
+            <div className="lg:col-span-8 rounded-2xl border border-[#223142] bg-[#0c131d]/90 p-6 md:p-8 space-y-6">
+              <div className="flex items-center justify-between flex-wrap gap-2 border-b border-[#1c2736] pb-4">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[#4edea3]/10 border border-[#4edea3]/30 text-[#4edea3]">
+                      LEVEL 1 // PUBLIC TOPOLOGY
+                    </span>
+                    <h2 className="text-xl font-bold text-white font-mono">
+                      {activeStudy.identity.projectName} // Topology
+                    </h2>
+                  </div>
+                  <p className="text-xs font-mono text-[#98cbff] mt-0.5">{activeStudy.identity.projectType}</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  {technicalBrief && (
+                    hasUnlockedBrief ? (
+                      <button
+                        onClick={() => setIsViewingBrief(true)}
+                        className="inline-flex items-center gap-1.5 rounded-lg bg-[#98cbff] px-3 py-1.5 text-xs font-mono font-bold text-[#001f3f] hover:opacity-90 transition-all cursor-pointer shadow-md shadow-[#98cbff]/15"
+                      >
+                        <Unlock className="h-3.5 w-3.5" /> View Level 2 Brief
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => setIsBriefModalOpen(true)}
+                        className="inline-flex items-center gap-1.5 rounded-lg bg-[#142334] border border-[#98cbff]/40 px-3 py-1.5 text-xs font-mono font-bold text-[#98cbff] hover:bg-[#98cbff] hover:text-[#001f3f] transition-all cursor-pointer"
+                      >
+                        <Lock className="h-3.5 w-3.5" /> Request Technical Brief
+                      </button>
+                    )
+                  )}
+                  <button
+                    onClick={() => onSelectScreen('CASE_STUDIES', activeStudy.slug)}
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-[#142232] border border-[#98cbff]/30 px-3 py-1.5 text-xs font-mono text-[#98cbff] hover:bg-[#98cbff] hover:text-[#001f3f] transition-all"
+                  >
+                    Full Case Study <ArrowUpRight className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+              </div>
 
           {/* ASCII / Box Architecture Diagram */}
           <div className="rounded-xl border border-[#1e2d3d] bg-[#070b10] p-5 font-mono text-xs text-[#a3b1c2] space-y-4">
@@ -174,6 +227,8 @@ export const ArchitectureScreen: React.FC<ArchitectureScreenProps> = ({ onSelect
           </div>
         </div>
       </div>
+      </>
+      )}
     </div>
   );
 };

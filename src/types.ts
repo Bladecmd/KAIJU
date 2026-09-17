@@ -8,12 +8,33 @@ export type ScreenId =
   | 'ANALYTICS'
   | 'GITHUB'
   | 'CONTACT'
+  | 'LANDING'
   // Legacy aliases mapped gracefully to screens
   | 'SYSTEM'
   | 'NODES'
   | 'SENSORS'
   | 'LOGS'
   | 'USER';
+
+export type AudienceType =
+  | 'recruiter'
+  | 'founder'
+  | 'ai-automation'
+  | 'solutions'
+  | 'general';
+
+export interface CampaignAudienceConfig {
+  id: AudienceType;
+  title: string;
+  badge: string;
+  heroProposition: string;
+  heroSubhead: string;
+  humanHook: string;
+  primaryProofSlug: string;
+  coreCapabilities: { title: string; desc: string; icon: string }[];
+  targetOpportunities: string[];
+  ctaText: string;
+}
 
 export type LogType = 'BOOT' | 'AUTH' | 'NET' | 'DATA' | 'WARN' | 'OK' | 'SYSTEM' | 'CMD' | 'ERROR' | 'AI';
 
@@ -26,14 +47,55 @@ export interface LogItem {
 }
 
 // -------------------------------------------------------------
+// 0. PROJECT STATUS & PROVENANCE CLAIMS MODEL (Strict Truth Discipline)
+// -------------------------------------------------------------
+export type ProjectStatus =
+  | 'LIVE'
+  | 'BUILDING'
+  | 'PRODUCTION'
+  | 'OPERATIONAL'
+  | 'VALIDATION'
+  | 'DEVELOPMENT'
+  | 'CASE STUDY'
+  | 'EXPERIMENTAL'
+  | 'HISTORICAL';
+
+export type EvidenceClaimStatus =
+  | 'VERIFIED'
+  | 'IMPLEMENTED'
+  | 'DEPLOYED'
+  | 'OBSERVED'
+  | 'TARGET'
+  | 'MODELLED'
+  | 'HISTORICAL'
+  | 'INFERENCE'
+  | 'UNKNOWN';
+
+export interface PortfolioClaim {
+  id: string;
+  text: string;
+  status: EvidenceClaimStatus;
+  source?: string;
+  lastVerified?: string;
+}
+
+// -------------------------------------------------------------
 // 1. PROJECT SHOWCASE MODEL
 // -------------------------------------------------------------
 export interface ProjectItem {
   id: string;
   slug: string;
   name: string;
-  category: 'AI_ORCHESTRATION' | 'AUTOMATION_DISPATCH' | 'COMPLIANCE_SEC' | 'AUDIO_DSP' | 'SOVEREIGN_SYSTEMS' | 'SYSTEMS_ARCHITECTURE';
-  status: 'PRODUCTION' | 'ACTIVE_PILOT' | 'STABLE_CORE' | 'UNDER_ACTIVE_DEV';
+  category:
+    | 'AI_ORCHESTRATION'
+    | 'AUTOMATION_DISPATCH'
+    | 'COMPLIANCE_SEC'
+    | 'AUDIO_DSP'
+    | 'SOVEREIGN_SYSTEMS'
+    | 'SYSTEMS_ARCHITECTURE'
+    | 'ENTERPRISE_RPA'
+    | 'GOVERNANCE_CAPITAL';
+  status: ProjectStatus;
   tagline: string;
   shortDescription: string;
   businessPurpose: string;
@@ -41,6 +103,7 @@ export interface ProjectItem {
   architectureOverview: string;
   keyCapabilities: string[];
   evidenceHighlights: string[];
+  claims?: PortfolioClaim[];
   caseStudyId: string;
   githubUrl?: string;
   liveDemoUrl?: string;
@@ -297,6 +360,7 @@ export interface SkillCategory {
     level: 'ARCHITECT' | 'EXPERT' | 'ADVANCED' | 'PRACTITIONER';
     evidence: string;
     tags: string[];
+    usedIn?: string[];
   }[];
 }
 
@@ -334,7 +398,64 @@ export interface GitHubRepoItem {
 }
 
 // -------------------------------------------------------------
-// 6. ANALYTICS MODEL (Privacy-First)
+// 5.5 PROPRIETARY IP & PROGRESSIVE DISCLOSURE ACCESS MODEL
+// -------------------------------------------------------------
+export type DisclosureTier = 'PUBLIC' | 'RESTRICTED' | 'CONFIDENTIAL';
+
+export interface TechnicalBriefData {
+  id: string;
+  projectSlug: string;
+  projectName: string;
+  classification: 'RESTRICTED_TECHNICAL_BRIEF';
+  status: 'ACTIVE_BRIEF' | 'NDA_REQUIRED' | 'PROPRIETARY_LOCKED';
+  executiveSummary: string;
+  deepArchitectureTopology: string;
+  componentSpecs: {
+    name: string;
+    responsibility: string;
+    tech: string;
+    considerations: string;
+  }[];
+  sequenceFlowSummary: string;
+  sequenceSteps: {
+    step: number;
+    phase: string;
+    service: string;
+    action: string;
+    securityCheck: string;
+  }[];
+  engineeringTradeOffs: {
+    decision: string;
+    whyChosen: string;
+    rejectedAlternatives: string[];
+    failureModeMitigation: string;
+  }[];
+  securityAndDataPerimeter: {
+    area: string;
+    mechanism: string;
+    confidentialityStatus: string;
+  }[];
+  withheldProprietaryNotes: string[];
+  ndaNotice: string;
+}
+
+export interface BriefAccessRequest {
+  id: string;
+  projectSlug: string;
+  projectName: string;
+  fullName: string;
+  workEmail: string;
+  organization: string;
+  roleOrPurpose: string;
+  ndaAcknowledged: boolean;
+  timestamp: string;
+  status: 'AUTO_APPROVED' | 'PENDING_REVIEW' | 'DIRECT_DISCUSSION_ONLY';
+  accessToken?: string;
+  utm?: UTMParameters;
+}
+
+// -------------------------------------------------------------
+// 6. ANALYTICS & CAMPAIGN ATTRIBUTION MODEL (Privacy-First)
 // -------------------------------------------------------------
 export type AnalyticsEventType =
   | 'PAGE_VIEW'
@@ -345,7 +466,16 @@ export type AnalyticsEventType =
   | 'DEMO_CLICK'
   | 'CV_DOWNLOAD'
   | 'CONTACT_SUBMIT'
-  | 'COMMAND_PALETTE_TRIGGER';
+  | 'COMMAND_PALETTE_TRIGGER'
+  | 'TECHNICAL_BRIEF_REQUEST'
+  | 'TECHNICAL_BRIEF_VIEW';
+
+export interface UTMParameters {
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_content?: string;
+}
 
 export interface AnalyticsEvent {
   id: string;
@@ -356,6 +486,7 @@ export interface AnalyticsEvent {
   country: string;
   deviceType: 'DESKTOP' | 'MOBILE' | 'TABLET';
   sessionDuration: number;
+  utm?: UTMParameters;
 }
 
 export interface AnalyticsSummary {
@@ -365,6 +496,7 @@ export interface AnalyticsSummary {
   topGeos: { country: string; percentage: number }[];
   trafficSources: { source: string; percentage: number }[];
   popularProjects: { name: string; views: number; caseStudyClicks: number }[];
+  activeCampaigns: { campaign: string; source: string; visits: number }[];
   recruiterInteractions: {
     cvViews: number;
     caseStudyReads: number;

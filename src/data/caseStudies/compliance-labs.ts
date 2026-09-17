@@ -6,10 +6,10 @@ export const complianceLabsCaseStudy: CaseStudyData = {
 
   // 01 - PROJECT IDENTITY
   identity: {
-    projectName: 'ComplianceLabs',
-    projectType: 'Automated Regulatory Audit, Policy AST Scanning & Evidence Engine',
-    status: 'PRODUCTION (Enterprise Security Tool)',
-    myRole: 'Founder, Security Architect, Systems Designer & AI Orchestrator',
+    projectName: 'Compliance Labs & Capital',
+    projectType: 'Heavy-Industry Compliance & Commercial Finance Brokerage Platform',
+    status: 'BUILDING (Compliance & Commercial Finance Architecture)',
+    myRole: 'Founder, Systems Architect & Commercial Systems Designer',
     technologyStack: [
       'TypeScript 5.8',
       'Python 3.12 (Parser Core)',

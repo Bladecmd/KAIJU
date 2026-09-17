@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { allCaseStudies, getCaseStudyBySlug } from '../../data/caseStudies';
 import { CaseStudyData, ScreenId } from '../../types';
 import { analytics } from '../../services/analytics';
+import { getTechnicalBrief } from '../../data/technicalBriefsData';
+import { accessControl } from '../../services/accessControl';
+import { TechnicalBriefModal } from '../TechnicalBriefModal';
+import { TechnicalBriefViewer } from '../TechnicalBriefViewer';
 import {
   FileText,
   Layers,
@@ -16,6 +20,7 @@ import {
   Server,
   Database,
   Lock,
+  Unlock,
   ChevronDown,
   ChevronUp,
   Search,
@@ -45,6 +50,8 @@ export const CaseStudiesScreen: React.FC<CaseStudiesScreenProps> = ({
   );
   const [activeSection, setActiveSection] = useState<string>('01');
   const [copiedSection, setCopiedSection] = useState<string | null>(null);
+  const [isBriefModalOpen, setIsBriefModalOpen] = useState(false);
+  const [isViewingBrief, setIsViewingBrief] = useState(false);
 
   useEffect(() => {
     if (initialSlug) {
@@ -54,6 +61,8 @@ export const CaseStudiesScreen: React.FC<CaseStudiesScreenProps> = ({
 
   const currentStudy: CaseStudyData =
     getCaseStudyBySlug(selectedSlug) || allCaseStudies[0];
+  const technicalBrief = getTechnicalBrief(selectedSlug);
+  const hasUnlockedBrief = accessControl.hasAccess(selectedSlug);
 
   const handleCopySectionLink = (secId: string) => {
     const url = `${window.location.origin}/#casestudy=${selectedSlug}&section=${secId}`;
@@ -101,6 +110,18 @@ export const CaseStudiesScreen: React.FC<CaseStudiesScreenProps> = ({
 
   return (
     <div className="space-y-8 animate-fadeIn">
+      {/* Technical Brief Modal */}
+      <TechnicalBriefModal
+        isOpen={isBriefModalOpen}
+        onClose={() => setIsBriefModalOpen(false)}
+        projectSlug={selectedSlug}
+        projectName={currentStudy.identity.projectName}
+        onAccessGranted={() => {
+          setIsBriefModalOpen(false);
+          setIsViewingBrief(true);
+        }}
+      />
+
       {/* ------------------------------------------------------------- */}
       {/* 1. PROJECT SELECTOR TABS                                      */}
       {/* ------------------------------------------------------------- */}
@@ -108,11 +129,18 @@ export const CaseStudiesScreen: React.FC<CaseStudiesScreenProps> = ({
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#98cbff]/30 bg-[#98cbff]/10 px-3 py-1 text-xs font-mono text-[#98cbff]">
             <FileText className="h-3.5 w-3.5" />
-            MASTER CASE STUDY ENGINE // 25-SECTION ENTERPRISE EVIDENCE
+            PROGRESSIVE DISCLOSURE EVIDENCE // LEVEL 1 PUBLIC & LEVEL 2 RESTRICTED
           </div>
-          <span className="text-xs font-mono text-[#657a8e]">
-            Select system to inspect complete engineering record:
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-mono text-[#657a8e] hidden md:inline">
+              Select system:
+            </span>
+            {hasUnlockedBrief && (
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#4edea3]/10 border border-[#4edea3]/30 text-[#4edea3] flex items-center gap-1">
+                <Unlock className="h-3 w-3" /> Level 2 Active
+              </span>
+            )}
+          </div>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 pt-1">
@@ -123,6 +151,7 @@ export const CaseStudiesScreen: React.FC<CaseStudiesScreenProps> = ({
                 key={cs.id}
                 onClick={() => {
                   setSelectedSlug(cs.slug);
+                  setIsViewingBrief(false);
                   analytics.track('CASE_STUDY_VIEW', cs.identity.projectName);
                 }}
                 className={`flex flex-col items-start p-3 rounded-xl text-left font-mono transition-all ${
@@ -142,6 +171,55 @@ export const CaseStudiesScreen: React.FC<CaseStudiesScreenProps> = ({
           })}
         </div>
       </div>
+
+      {/* If User Is Actively Viewing Unlocked Level 2 Brief */}
+      {isViewingBrief && technicalBrief ? (
+        <TechnicalBriefViewer
+          brief={technicalBrief}
+          onBackToCaseStudy={() => setIsViewingBrief(false)}
+          onContactBlade={() => onSelectScreen('CONTACT')}
+        />
+      ) : (
+        <>
+          {/* Level 2 Disclosure Banner */}
+          {technicalBrief && (
+            <div className="rounded-2xl border border-[#233548] bg-gradient-to-r from-[#0d1622] to-[#091018] p-5 md:p-6 flex items-center justify-between flex-wrap gap-4 shadow-lg font-mono">
+              <div className="space-y-1 max-w-2xl">
+                <div className="flex items-center gap-2">
+                  <span className="px-2 py-0.5 rounded text-[10px] bg-[#98cbff]/10 border border-[#98cbff]/30 text-[#98cbff] font-bold">
+                    LEVEL 2 TECHNICAL BRIEF AVAILABLE
+                  </span>
+                  <span className="text-[11px] text-[#657a8e]">
+                    Sequence flows, atomic locks, failure modes & trade-offs
+                  </span>
+                </div>
+                <h3 className="text-sm md:text-base font-bold text-white">
+                  Want the deeper technical breakdown for {currentStudy.identity.projectName}?
+                </h3>
+                <p className="text-xs text-[#a3b1c2] font-sans">
+                  Inspect high-resolution microservice topology, atomic mutex scripts, and production trade-offs without proprietary IP exposure.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                {hasUnlockedBrief ? (
+                  <button
+                    onClick={() => setIsViewingBrief(true)}
+                    className="flex items-center gap-2 rounded-xl bg-[#98cbff] px-4 py-2.5 text-xs font-bold text-[#001f3f] hover:opacity-90 transition-all cursor-pointer shadow-md shadow-[#98cbff]/15"
+                  >
+                    <Unlock className="h-4 w-4" /> View Unlocked Technical Brief
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setIsBriefModalOpen(true)}
+                    className="flex items-center gap-2 rounded-xl bg-[#142334] border border-[#98cbff]/40 px-4 py-2.5 text-xs font-bold text-[#98cbff] hover:bg-[#98cbff] hover:text-[#001f3f] transition-all cursor-pointer shadow-md"
+                  >
+                    <Lock className="h-3.5 w-3.5" /> Request Technical Brief
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
 
       {/* ------------------------------------------------------------- */}
       {/* 2. MAIN CASE STUDY CONTAINER WITH SIDEBAR JUMP MATRIX         */}
@@ -991,6 +1069,8 @@ export const CaseStudiesScreen: React.FC<CaseStudiesScreenProps> = ({
           </section>
         </main>
       </div>
+      </>
+      )}
     </div>
   );
 };

@@ -51,13 +51,13 @@ export const ProjectsScreen: React.FC<ProjectsScreenProps> = ({ onSelectScreen }
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-[#98cbff]/30 bg-[#98cbff]/10 px-3 py-1 text-xs font-mono text-[#98cbff] mb-2">
             <Briefcase className="h-3.5 w-3.5" />
-            ENGINEERING_CATALOG // 6 FLAGSHIP PRODUCTION SYSTEMS
+            ENGINEERING_CATALOG // SOVEREIGN ECOSYSTEM & VENTURES
           </div>
           <h1 className="text-2xl md:text-3xl font-bold text-white font-mono">
             Production Software & Systems
           </h1>
           <p className="text-sm text-[#a3b1c2] mt-1">
-            Real systems architected, orchestrated, tested, and deployed across high-throughput dispatch, regulatory compliance, and low-latency audio.
+            Real systems architected, orchestrated, tested, and deployed across executive intelligence, security perimeters, field service dispatch, compliance, and multi-venture ledgers.
           </p>
         </div>
 

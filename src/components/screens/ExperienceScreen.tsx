@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { experienceData } from '../../data/experienceData';
 import { ScreenId } from '../../types';
+import { analytics } from '../../services/analytics';
 import {
   Briefcase,
   GraduationCap,
@@ -11,6 +12,9 @@ import {
   ShieldCheck,
   Cpu,
   Layers,
+  Download,
+  Printer,
+  FileText,
 } from 'lucide-react';
 
 interface ExperienceScreenProps {
@@ -18,20 +22,119 @@ interface ExperienceScreenProps {
 }
 
 export const ExperienceScreen: React.FC<ExperienceScreenProps> = ({ onSelectScreen }) => {
+  const [downloadSuccess, setDownloadSuccess] = useState(false);
+
+  const handleDownloadCV = () => {
+    analytics.track('CV_DOWNLOAD', 'Blade - Systems Architect & Builder Resume');
+    // Generate text/markdown downloadable resume
+    const cvContent = `# BLADE // CURRICULUM VITAE & ENGINEERING RECORD
+Professional Title: AI-Native Systems Architect, Automation Engineer & Technical Operator
+Location: London, UK | Remote
+Public Flag / Portfolio: https://kaiju.blade.dev
+
+--------------------------------------------------------------------------------
+EXECUTIVE PROFILE
+Technical founder, systems architect, and AI-native builder who bridges the gap between commercial strategy and resilient software execution. With an honours degree in Business Finance and hands-on production expertise in TypeScript, Python, Node.js, and robotic process automation (UiPath), I specialize in designing and shipping production software with measurable FinOps discipline.
+
+CORE OPERATIONAL CAPABILITIES
+- Systems Architecture & State Machines: Event-driven distributed systems, deterministic transitions, double-entry ledgers.
+- AI-Native Engineering: Prompt injection defense, model gateway failovers, context retrieval architectures (NOVA).
+- Automation & RPA: UiPath enterprise automation, custom microservice orchestration, async worker queues.
+- FinOps & Commercial Strategy: Unit margin enforcement, operational cost modeling, strict budget guardrails.
+
+--------------------------------------------------------------------------------
+PROFESSIONAL TRACK RECORD
+
+1. TECHNICAL FOUNDER & SYSTEMS ARCHITECT
+   Sovereign Ecosystem & Ventures | 2023 - PRESENT
+   - Architected NOVA executive intelligence model gateway with dynamic multi-model routing and offline fallback.
+   - Built Metro Task Force real-world field dispatch & pricing platform serving Greater London emergency drainage.
+   - Designed Sovereign Security zero-trust gateway with prompt injection sanitization and audit trails.
+   - Orchestrated central multi-venture Truth Ledger with double-entry ACID accounting across projects.
+
+2. COMMERCIAL OPERATOR & SYSTEMS LEAD
+   Metro Task Force | 2024 - PRESENT
+   - Deployed high-availability dispatch engine reducing response latency from hours to under 15 minutes.
+   - Built automated quote calculation engine enforcing minimum 35% gross profit margin on every service booking.
+   - Integrated real-time SMS/WhatsApp dispatch alerts and driver status synchronization.
+
+3. ENTERPRISE AUTOMATION & PROCESS CONSULTANT
+   Independent / Advisory | 2021 - 2023
+   - Developed enterprise robotic process automation (RPA) workflows utilizing UiPath and Python.
+   - Automated financial data extraction, PDF compliance reconciliation, and invoice matching routines.
+   - Designed fault-tolerant retry and dead-letter queues handling enterprise transaction volumes.
+
+--------------------------------------------------------------------------------
+ACADEMIC FOUNDATIONS
+- BSc (Hons) Business Finance | Upper Second-Class Honours (2:1)
+  Deep grounding in corporate finance, balance sheet analysis, econometric modeling, and market microstructure.
+
+--------------------------------------------------------------------------------
+TECHNICAL COMPETENCIES
+- Languages: TypeScript, JavaScript, Python, SQL, C++, HTML5/CSS3
+- Frameworks & Runtimes: React 19, Node.js, Fastify, Express, Tailwind CSS, Vite, Next.js
+- Databases: PostgreSQL, Redis, SQLite, pgvector, DuckDB
+- Infrastructure: Docker, Linux, Cloudflare Workers, Nginx, AWS (S3, KMS), GitHub Actions CI/CD
+- Automation & AI: UiPath, Claude API, OpenAI API, Gemini API, LangChain, Ollama
+
+--------------------------------------------------------------------------------
+CONTACT & PORTFOLIO
+- Portfolio: Kaiju OS
+- Email: Contact form via Kaiju OS Inbound Terminal
+`;
+
+    const blob = new Blob([cvContent], { type: 'text/markdown;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'Blade_Systems_Architect_CV.md');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setDownloadSuccess(true);
+    setTimeout(() => setDownloadSuccess(false), 3000);
+  };
+
+  const handlePrintCV = () => {
+    analytics.track('CV_DOWNLOAD', 'Print View Triggered');
+    window.print();
+  };
+
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Header */}
-      <div className="border-b border-[#1c2736] pb-6 space-y-2">
-        <div className="inline-flex items-center gap-2 rounded-full border border-[#98cbff]/30 bg-[#98cbff]/10 px-3 py-1 text-xs font-mono text-[#98cbff]">
-          <Briefcase className="h-3.5 w-3.5" />
-          TRACK_RECORD // SYSTEMS BUILDER & BUSINESS FINANCE BACKGROUND
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-[#1c2736] pb-6">
+        <div className="space-y-2">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#98cbff]/30 bg-[#98cbff]/10 px-3 py-1 text-xs font-mono text-[#98cbff]">
+            <Briefcase className="h-3.5 w-3.5" />
+            TRACK_RECORD // SYSTEMS BUILDER & BUSINESS FINANCE BACKGROUND
+          </div>
+          <h1 className="text-2xl md:text-3xl font-bold text-white font-mono">
+            Career Experience & Engineering Philosophy
+          </h1>
+          <p className="text-sm text-[#a3b1c2]">
+            Track record as an AI-native systems founder, product architect, and builder with formal academic roots in Business Finance.
+          </p>
         </div>
-        <h1 className="text-2xl md:text-3xl font-bold text-white font-mono">
-          Career Experience & Engineering Philosophy
-        </h1>
-        <p className="text-sm text-[#a3b1c2]">
-          Track record as an AI-native systems founder, product architect, and builder with formal academic roots in Business Finance.
-        </p>
+
+        {/* CV Actions */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handlePrintCV}
+            className="flex items-center gap-1.5 rounded-xl border border-[#223142] bg-[#0c141e] px-3.5 py-2.5 text-xs font-mono text-[#a3b1c2] hover:text-white hover:border-[#35495e] transition-all"
+            title="Print / Save as PDF"
+          >
+            <Printer className="h-3.5 w-3.5" /> Print / PDF
+          </button>
+
+          <button
+            onClick={handleDownloadCV}
+            className="flex items-center gap-1.5 rounded-xl bg-[#98cbff] px-4 py-2.5 text-xs font-mono font-bold text-[#001f3f] hover:bg-white transition-all shadow-md shadow-[#98cbff]/20"
+          >
+            <Download className="h-3.5 w-3.5" />
+            {downloadSuccess ? 'Downloaded!' : 'Download Full CV (.md)'}
+          </button>
+        </div>
       </div>
 
       {/* 10-Step AI-Native Engineering Lifecycle */}

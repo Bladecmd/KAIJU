@@ -7,16 +7,16 @@ export const sovereignOsCaseStudy: CaseStudyData = {
   // 01 - PROJECT IDENTITY
   identity: {
     projectName: 'Sovereign OS',
-    projectType: 'Decentralized Sovereign Operations & Local-First Automation Engine',
-    status: 'ACTIVE_PILOT (Air-Gapped Business Platform)',
-    myRole: 'Founder, Distributed Systems Architect & Lead Engineer',
+    projectType: 'Executive Business Intelligence, Truth Ledger & Multi-Venture Orchestration Hub',
+    status: 'DEVELOPMENT (Internal Operations Platform)',
+    myRole: 'Founder, Systems Architect & Lead Software Engineer',
     technologyStack: [
       'TypeScript 5.8',
-      'Yjs (Conflict-Free Replicated Data Types / CRDTs)',
-      'SQLite in WASM with OPFS (Origin Private File System)',
-      'WebAuthn / WebCrypto API',
-      'Libp2p / WebRTC DataChannels',
-      'Docker Compose / Linux Hardening',
+      'React 19',
+      'Fastify Microservices',
+      'PostgreSQL (Truth Ledger)',
+      'Redis Event Bus',
+      'Docker Compose',
     ],
     developmentPeriod: '2024 - 2026',
     repositoryUrl: 'https://github.com/kaiju-systems/sovereign-os',
@@ -26,15 +26,15 @@ export const sovereignOsCaseStudy: CaseStudyData = {
   // 02 - THE ONE-MINUTE STORY
   oneMinuteStory: {
     theProblem:
-      'Critical business operations and sensitive executive workflows are held hostage by centralized cloud providers, exposing companies to privacy leaks, sudden API outages, vendor lock-in, and unpredictable subscription price hikes.',
+      'Running multiple commercial ventures without unified telemetry results in fragmented operational oversight, delayed awareness of unit margin erosion, and subjective milestone reporting.',
     theIdea:
-      'Build a local-first, peer-synchronized sovereign operations system where the user owns 100% of their database on physical hardware, while maintaining seamless multi-device real-time collaboration without relying on centralized SaaS databases.',
+      'Build a central executive intelligence and operational orchestration hub that ingests telemetry across all portfolio businesses into an immutable Truth Ledger, linking strategic roadmaps directly to verifiable operational events.',
     theSystem:
-      'A decentralized local-first architecture combining SQLite embedded in WebAssembly with Origin Private File System (OPFS), Yjs Conflict-Free Replicated Data Types (CRDTs), and WebAuthn hardware token authentication.',
+      'An event-driven orchestration architecture combining Fastify microservices, PostgreSQL Truth Ledger storage, Redis real-time telemetry streams, and VEGA analytical reporting engines.',
     theOutcome:
-      'Achieved 100% offline operational capability, zero reliance on external cloud storage, and sub-second multi-device peer synchronization upon network reconnection.',
+      'Provides unified multi-venture operational health visibility, automated roadmap progression tracking, and an unassailable record separating verified achievements from operational targets.',
     whyItMatters:
-      'Demonstrates advanced distributed systems engineering, CRDT synchronization algorithms, local-first database architectures, hardware-backed cryptography, and data sovereignty design.',
+      'Demonstrates high-level business systems architecture, event stream aggregation, reality-first engineering discipline, and executive operational leadership.',
   },
 
   // 03 - BUSINESS CONTEXT

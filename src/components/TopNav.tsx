@@ -38,14 +38,14 @@ export const TopNav: React.FC<TopNavProps> = ({
 }) => {
   const navTabs: { id: ScreenId; label: string; badge?: string }[] = [
     { id: 'HOME', label: 'OVERVIEW' },
-    { id: 'PROJECTS', label: 'PROJECTS' },
+    { id: 'PROJECTS', label: 'THINGS I’VE BUILT' },
     { id: 'CASE_STUDIES', label: 'CASE STUDIES', badge: '25-SEC' },
     { id: 'ARCHITECTURE', label: 'ARCHITECTURE' },
-    { id: 'SKILLS', label: 'SKILLS' },
-    { id: 'EXPERIENCE', label: 'EXPERIENCE' },
+    { id: 'SKILLS', label: 'WHERE I FIT' },
+    { id: 'EXPERIENCE', label: 'TRACK RECORD & CV' },
     { id: 'ANALYTICS', label: 'ANALYTICS' },
     { id: 'GITHUB', label: 'GITHUB' },
-    { id: 'CONTACT', label: 'CONTACT' },
+    { id: 'CONTACT', label: 'CONVERSATION' },
   ];
 
   return (
@@ -61,10 +61,10 @@ export const TopNav: React.FC<TopNavProps> = ({
         >
           <div className="w-2.5 h-2.5 rounded-full bg-[#4edea3] group-hover:scale-125 transition-transform animate-pulse shadow-[0_0_8px_#4edea3]" />
           <span className="font-bold text-lg md:text-xl tracking-tighter text-[#e5e2e1] group-hover:text-white font-mono transition-colors">
-            KAIJU_OS
+            KAIJU // BLADE
           </span>
           <span className="text-[10px] text-[#98cbff] px-1.5 py-0.5 rounded bg-[#98cbff]/10 border border-[#98cbff]/20 font-mono hidden sm:inline-block">
-            V2.5_EVIDENCE
+            SYSTEMS_BUILDER
           </span>
         </button>
 
@@ -112,7 +112,7 @@ export const TopNav: React.FC<TopNavProps> = ({
               }
             }}
             placeholder="Search systems & evidence..."
-            className="bg-[#05080c] border border-[#223142] rounded-lg pl-8 pr-12 py-1.5 text-xs text-[#e5e2e1] placeholder-[#5c7287] font-mono focus:border-[#98cbff] focus:ring-1 focus:ring-[#98cbff] focus:outline-none w-44 lg:w-56 transition-all"
+            className="bg-[#05080c] border border-[#223142] rounded-lg pl-8 pr-12 py-1.5 text-xs text-[#e5e2e1] placeholder-[#5c7287] font-mono focus:border-[#98cbff] focus:ring-1 focus:ring-[#98cbff] focus:outline-none w-36 lg:w-48 transition-all"
           />
           <kbd
             onClick={onOpenCommandPalette}
@@ -132,13 +132,14 @@ export const TopNav: React.FC<TopNavProps> = ({
           <Search className="w-4 h-4" />
         </button>
 
-        {/* Quick Case Study trigger */}
+        {/* Persistent Tasteful View CV Button */}
         <button
-          onClick={() => onSelectScreen('CASE_STUDIES')}
-          className="hidden sm:inline-flex items-center gap-1.5 rounded-lg bg-[#98cbff]/10 border border-[#98cbff]/30 px-2.5 py-1 text-xs font-mono text-[#98cbff] hover:bg-[#98cbff] hover:text-[#001f3f] transition-all cursor-pointer"
+          onClick={() => onSelectScreen('EXPERIENCE')}
+          className="inline-flex items-center gap-1.5 rounded-lg border border-[#4edea3]/40 bg-[#4edea3]/10 px-2.5 py-1.5 text-xs font-mono font-bold text-[#4edea3] hover:bg-[#4edea3] hover:text-[#001f3f] transition-all cursor-pointer shadow-sm"
+          title="View Experience & Download CV"
         >
           <FileText className="w-3.5 h-3.5" />
-          <span>Case Studies</span>
+          <span>View CV</span>
         </button>
 
         {/* Contact CTA */}
@@ -147,7 +148,7 @@ export const TopNav: React.FC<TopNavProps> = ({
           className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-[#98cbff] to-[#76aae6] px-3 py-1.5 text-xs font-mono font-bold text-[#001f3f] hover:opacity-90 transition-all cursor-pointer shadow-md shadow-[#98cbff]/10"
         >
           <Mail className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline">Contact</span>
+          <span className="hidden sm:inline">Let's Talk</span>
         </button>
       </div>
     </header>

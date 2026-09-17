@@ -12,6 +12,7 @@ import { ExperienceScreen } from './components/screens/ExperienceScreen';
 import { AnalyticsScreen } from './components/screens/AnalyticsScreen';
 import { GitHubScreen } from './components/screens/GitHubScreen';
 import { ContactScreen } from './components/screens/ContactScreen';
+import { CampaignLandingScreen } from './components/screens/CampaignLandingScreen';
 import { L1NodesScreen } from './components/screens/L1_NodesScreen';
 import { L2SensorsScreen } from './components/screens/L2_SensorsScreen';
 import { L3LogsScreen } from './components/screens/L3_LogsScreen';
@@ -23,6 +24,7 @@ import { DeployModal } from './components/modals/DeployModal';
 import { PowerModal } from './components/modals/PowerModal';
 import { analytics } from './services/analytics';
 import { Plus, Download, FileText, Mail, Github, Layers } from 'lucide-react';
+import { AudienceType } from './types';
 
 const initialLogSeed: LogItem[] = [
   { id: '1', time: '04:10:01', type: 'BOOT', text: 'Initializing KAIJU_OS L0_CORE: OK' },
@@ -38,12 +40,54 @@ const initialLogSeed: LogItem[] = [
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<ScreenId>('HOME');
   const [activeCaseStudySlug, setActiveCaseStudySlug] = useState<string>('metro-task-force');
+  const [activeAudience, setActiveAudience] = useState<AudienceType>('recruiter');
   const [logs, setLogs] = useState<LogItem[]>(initialLogSeed);
   const [queryFilter, setQueryFilter] = useState<string>('');
   const [activeAutomationCount, setActiveAutomationCount] = useState<number>(6);
   const [complexityLevel, setComplexityLevel] = useState<
     'OPTIMAL' | 'HIGH_INTENSITY' | 'OVERCLOCK' | 'THROTTLED'
   >('HIGH_INTENSITY');
+
+  // Parse initial URL hash or query params for campaign routing (e.g. #for=recruiter or #casestudy=nova)
+  useEffect(() => {
+    const handleHashRouting = () => {
+      const hash = window.location.hash.toLowerCase();
+      if (hash.includes('for=recruiter') || hash.includes('/for/recruiter')) {
+        setActiveAudience('recruiter');
+        setCurrentScreen('LANDING');
+      } else if (hash.includes('for=founder') || hash.includes('/for/founder')) {
+        setActiveAudience('founder');
+        setCurrentScreen('LANDING');
+      } else if (hash.includes('for=ai') || hash.includes('for=automation')) {
+        setActiveAudience('ai-automation');
+        setCurrentScreen('LANDING');
+      } else if (hash.includes('for=solutions') || hash.includes('/for/solutions')) {
+        setActiveAudience('solutions');
+        setCurrentScreen('LANDING');
+      } else if (hash.includes('casestudy=') || hash.includes('casestudies')) {
+        const parts = hash.split('casestudy=');
+        if (parts[1]) {
+          const slug = parts[1].split('&')[0];
+          setActiveCaseStudySlug(slug);
+        }
+        setCurrentScreen('CASE_STUDIES');
+      } else if (hash.includes('projects')) {
+        setCurrentScreen('PROJECTS');
+      } else if (hash.includes('architecture')) {
+        setCurrentScreen('ARCHITECTURE');
+      } else if (hash.includes('skills')) {
+        setCurrentScreen('SKILLS');
+      } else if (hash.includes('experience') || hash.includes('cv')) {
+        setCurrentScreen('EXPERIENCE');
+      } else if (hash.includes('contact')) {
+        setCurrentScreen('CONTACT');
+      }
+    };
+
+    handleHashRouting();
+    window.addEventListener('hashchange', handleHashRouting);
+    return () => window.removeEventListener('hashchange', handleHashRouting);
+  }, []);
 
   // Modals state
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
@@ -211,6 +255,14 @@ export default function App() {
 
         {currentScreen === 'CONTACT' && (
           <ContactScreen onAddLog={addLog} onSelectScreen={handleSelectScreen} />
+        )}
+
+        {currentScreen === 'LANDING' && (
+          <CampaignLandingScreen
+            audienceId={activeAudience}
+            onSelectScreen={handleSelectScreen}
+            onSwitchAudience={(aud) => setActiveAudience(aud)}
+          />
         )}
 
         {/* Legacy Screen Support */}

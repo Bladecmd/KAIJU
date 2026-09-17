@@ -39,20 +39,20 @@ export const SideNav: React.FC<SideNavProps> = ({
   }[] = [
     {
       id: 'HOME',
-      layer: 'L0_CORE',
-      label: 'Overview & Telemetry',
+      layer: 'L0_HOME',
+      label: 'Overview & Ethos',
       icon: <Boxes className="w-4 h-4 shrink-0" />,
     },
     {
       id: 'PROJECTS',
-      layer: 'L1_PROJ',
-      label: 'Systems Catalog',
+      layer: 'L1_WORK',
+      label: 'Things I’ve Built',
       icon: <Briefcase className="w-4 h-4 shrink-0" />,
     },
     {
       id: 'CASE_STUDIES',
       layer: 'L2_CASE',
-      label: '25-Sec Case Studies',
+      label: 'What Happened (Case Studies)',
       icon: <FileText className="w-4 h-4 shrink-0" />,
     },
     {
@@ -63,32 +63,32 @@ export const SideNav: React.FC<SideNavProps> = ({
     },
     {
       id: 'SKILLS',
-      layer: 'L4_SKIL',
-      label: 'Competency Matrix',
+      layer: 'L4_FIT',
+      label: 'Where I Tend to Be Useful',
       icon: <Cpu className="w-4 h-4 shrink-0" />,
     },
     {
       id: 'EXPERIENCE',
-      layer: 'L5_EXPR',
-      label: 'Track Record & Phil.',
+      layer: 'L5_CV',
+      label: 'Track Record & CV',
       icon: <GraduationCap className="w-4 h-4 shrink-0" />,
     },
     {
       id: 'ANALYTICS',
       layer: 'L6_METR',
-      label: 'Platform Analytics',
+      label: 'Platform Telemetry',
       icon: <Activity className="w-4 h-4 shrink-0" />,
     },
     {
       id: 'GITHUB',
       layer: 'L7_REPO',
-      label: 'Public Source Repos',
+      label: 'Public Repositories',
       icon: <Github className="w-4 h-4 shrink-0" />,
     },
     {
       id: 'CONTACT',
       layer: 'L8_COMM',
-      label: 'Engineering Inbound',
+      label: 'Start a Conversation',
       icon: <Mail className="w-4 h-4 shrink-0" />,
     },
   ];
@@ -113,12 +113,12 @@ export const SideNav: React.FC<SideNavProps> = ({
         <div className="overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
           <div className="flex items-center gap-1.5">
             <p className="font-mono text-xs text-[#e5e2e1] font-bold tracking-tight">
-              ARCHITECT_ADM
+              BLADE // ARCHITECT
             </p>
             <span className="h-1.5 w-1.5 rounded-full bg-[#4edea3]" />
           </div>
           <p className="text-[10px] text-[#71879c] font-mono tracking-tighter">
-            AI-NATIVE SYSTEMS
+            AI-NATIVE SYSTEMS BUILDER
           </p>
         </div>
       </div>

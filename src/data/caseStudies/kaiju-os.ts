@@ -6,10 +6,10 @@ export const kaijuOsCaseStudy: CaseStudyData = {
 
   // 01 - PROJECT IDENTITY
   identity: {
-    projectName: 'Kaiju OS',
-    projectType: 'Executive Engineering Evidence Platform & Systems Storefront',
-    status: 'PRODUCTION (Active Public Platform)',
-    myRole: 'Founder, Product Architect, Full-Stack Engineer & AI Orchestrator',
+    projectName: 'Building Kaiju',
+    projectType: 'Professional Portfolio, Proof & Personal Brand Platform',
+    status: 'LIVE (Public Engineering Flag)',
+    myRole: 'Founder, Systems Architect & Full-Stack Builder',
     technologyStack: [
       'React 19 / TypeScript 5.8',
       'Vite 6 / Tailwind CSS v4',

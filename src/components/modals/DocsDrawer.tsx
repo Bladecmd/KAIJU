@@ -13,11 +13,11 @@ export const DocsDrawer: React.FC<DocsDrawerProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const sections = [
-    { id: 'intro', title: '01. Executive Overview & Thesis' },
-    { id: 'pipelines', title: '02. Automation Pipelines & Nodes' },
-    { id: 'telemetry', title: '03. Sensor Feeds & Low-Latency Routing' },
-    { id: 'cli', title: '04. Terminal CLI & STDOUT Protocol' },
-    { id: 'api', title: '05. High-Frequency WebSocket & gRPC API' },
+    { id: 'intro', title: '01. The Producer Model & Intent' },
+    { id: 'nova', title: '02. NOVA Cognitive Architecture' },
+    { id: 'security', title: '03. Sovereign Security Perimeter' },
+    { id: 'mtf', title: '04. Metro Task Force State Machine' },
+    { id: 'ledger', title: '05. Sovereign OS Truth Ledger' },
   ];
 
   return (
@@ -39,10 +39,10 @@ export const DocsDrawer: React.FC<DocsDrawerProps> = ({ isOpen, onClose }) => {
             </div>
             <div>
               <h2 className="text-lg font-bold font-mono-tech text-[#e5e2e1]">
-                KAIJU_OS // EXECUTIVE_DOCS
+                KAIJU_OS // SYSTEMS_DOCS
               </h2>
               <p className="text-xs text-[#88919d] font-mono-tech">
-                SYSTEM SPECIFICATIONS & ARCHITECTURE MANUAL
+                SOVEREIGN ECOSYSTEM ENGINEERING SPECIFICATIONS
               </p>
             </div>
           </div>
@@ -77,105 +77,89 @@ export const DocsDrawer: React.FC<DocsDrawerProps> = ({ isOpen, onClose }) => {
           {activeSection === 'intro' && (
             <div className="space-y-4">
               <h3 className="text-xl font-bold font-mono-tech text-[#e5e2e1]">
-                The Strategic Mandate for Capital Autonomy
+                The Producer Model: Human Intent & AI Acceleration
               </h3>
               <p>
-                In high-velocity institutional markets, human operational reaction times (150ms+) introduce insurmountable slippage and risk exposure. KAIJU OS was architected to abstract legacy transactional logic into deterministic execution graphs.
+                In high-velocity AI-native software engineering, human developers do not manually type routine boilerplates. The producer (Blade) defines the problem space, operational requirements, unit margin economics, system state machine boundaries, and verification criteria.
               </p>
               <div className="p-4 rounded-xl bg-black/50 border border-white/10 space-y-2 font-mono-tech text-xs">
-                <span className="text-[#4edea3] font-bold block">CORE PERFORMANCE PRINCIPLES:</span>
-                <p>• Zero runtime garbage collection via pre-allocated memory rings.</p>
-                <p>• Lock-free single-writer messaging pipelines (LMAX Disruptor pattern).</p>
-                <p>• Kernel-bypass raw socket ingestion over direct dark fiber connections.</p>
+                <span className="text-[#4edea3] font-bold block">OPERATING PRINCIPLES:</span>
+                <p>• Human architect strictly owns boundary definition, system topology, and security rules.</p>
+                <p>• AI agents (Gemini, Claude, deep research workers) accelerate code drafting and test suite generation.</p>
+                <p>• Mandatory human verification before deployment; zero unvetted autonomous self-modifying execution in production.</p>
               </div>
-              <p>
-                By continuous monitoring of the 6 primary global telemetry nodes, the operating system dynamically allocates worker threads to capture arbitrage opportunities before liquidity pools rebalance.
-              </p>
             </div>
           )}
 
-          {activeSection === 'pipelines' && (
+          {activeSection === 'nova' && (
             <div className="space-y-4">
               <h3 className="text-xl font-bold font-mono-tech text-[#e5e2e1]">
-                Autonomous Pipelines & Dynamic Hedging
+                NOVA Executive Intelligence & Model Gateway
               </h3>
               <p>
-                Execution workers (L1) run isolated in dedicated hyper-threads. Each worker is bound to a specific financial mandate (e.g. Delta-Neutral Collar, Statistical Spread Inversion, High-Frequency Cross-Venue Clearing).
+                NOVA functions as Blade's cognitive companion and task broker. Rather than exposing unmetered LLM access, NOVA sits behind a resilient model gateway with automatic provider fallback, semantic attention pruning, and isolated memory partitions.
               </p>
               <div className="space-y-2 font-mono-tech text-xs bg-black/40 p-4 rounded-xl border border-white/10">
-                <span className="text-[#98cbff] font-bold block">PIPELINE TOPOLOGY:</span>
-                <p><span className="text-[#4edea3]">[L1.01]</span> Liquidity Arb Router - Sub-1ms Spread Arbitrage</p>
-                <p><span className="text-[#4edea3]">[L1.02]</span> Hedge Protocol Sentinel - Dynamic Tail-Risk Collars</p>
-                <p><span className="text-[#4edea3]">[L1.03]</span> Market Inefficiency Hunter - Alpha Generation Ingester</p>
-                <p><span className="text-[#4edea3]">[L1.04]</span> Cross-Venue Settlement GW - Atomic Clearing Gateway</p>
+                <span className="text-[#98cbff] font-bold block">NOVA CORE ATTRIBUTES:</span>
+                <p><span className="text-[#4edea3]">[GATEWAY]</span> Dynamic routing between Anthropic, Google Gemini, and local Ollama models.</p>
+                <p><span className="text-[#4edea3]">[MEMORY]</span> Tiered cache: Ephemeral context, SQLite episodic journal, pgvector semantic store.</p>
+                <p><span className="text-[#4edea3]">[DEGRADED]</span> Offline deterministic rule-based mode when external APIs suffer outage or latency spike.</p>
               </div>
             </div>
           )}
 
-          {activeSection === 'telemetry' && (
+          {activeSection === 'security' && (
             <div className="space-y-4">
               <h3 className="text-xl font-bold font-mono-tech text-[#e5e2e1]">
-                Global Sensor Nodes & Failover Logic
+                Sovereign Security: Zero-Trust & Defensive Guardrails
               </h3>
               <p>
-                Sensor nodes situated in Tokyo (TY3), New York (NY4), London (LD4), and Frankfurt (FR2) stream orderbook depth deltas directly into the L0 core.
+                Defensive layer enforcing strict zero-trust boundaries across all human and agent interactions. Implements semantic prompt injection firewalls, canary tokens, and sandboxed execution environments.
               </p>
               <div className="p-4 bg-black/40 rounded-xl border border-white/10 font-mono-tech text-xs space-y-2">
-                <span className="text-[#ffb4ab] font-bold block">FAILOVER PROTOCOL:</span>
-                <p>If packet jitter exceeds 0.50ms on any primary route, the L0 state engine immediately reroutes outbound orders through an adjacent low-latency relay without halting active execution streams.</p>
+                <span className="text-[#ffb4ab] font-bold block">DEFENSIVE CONTROLS:</span>
+                <p>• Bidirectional token sanitizer: removes private keys, tokens, and PII before sending context to LLMs.</p>
+                <p>• V8 Isolate sandboxes for any dynamic script or automation evaluation.</p>
+                <p>• Hardware FIDO2 auth requirement for privileged operations and infrastructure mutations.</p>
               </div>
             </div>
           )}
 
-          {activeSection === 'cli' && (
+          {activeSection === 'mtf' && (
             <div className="space-y-4">
               <h3 className="text-xl font-bold font-mono-tech text-[#e5e2e1]">
-                Terminal CLI Reference
+                Metro Task Force: Real-World Field Service Dispatch
               </h3>
               <p>
-                The L0 terminal supports rapid command execution directly within the STDOUT stdout card.
+                Operational field-service platform operating in Greater London for commercial and residential emergency drainage. Features dynamic pricing engines, automated contractor job matching, and SMS/WhatsApp job status transitions.
               </p>
               <div className="bg-black/60 p-4 rounded-xl border border-white/10 font-mono-tech text-xs space-y-2 text-[#e5e2e1]">
-                <p><span className="text-[#98cbff]">status</span> - Output current engine health, active workers, complexity</p>
-                <p><span className="text-[#98cbff]">nodes</span> - Switch viewport to L1_AUTO pipelines</p>
-                <p><span className="text-[#98cbff]">sensors</span> - Switch viewport to L2_DATA radar map</p>
-                <p><span className="text-[#98cbff]">ping</span> - Trigger microsecond roundtrip ping to cluster</p>
-                <p><span className="text-[#98cbff]">sync</span> - Synchronize market liquidity indices with Tokyo/NY</p>
-                <p><span className="text-[#98cbff]">arch</span> - Open architecture blueprints</p>
-                <p><span className="text-[#98cbff]">docs</span> - Open this executive documentation drawer</p>
+                <p><span className="text-[#98cbff]">• State Machine:</span> Deterministic status transitions (QUOTE_REQUESTED &rarr; DEPOSIT_PAID &rarr; DISPATCHED &rarr; EN_ROUTE &rarr; ON_SITE &rarr; RESOLVED &rarr; INVOICED).</p>
+                <p><span className="text-[#98cbff]">• FinOps Margin Guard:</span> Minimum 35% net margin enforced on every emergency quotation.</p>
+                <p><span className="text-[#98cbff]">• High-Availability:</span> 99.9% uptime SLA with offline PWA field client capabilities.</p>
               </div>
             </div>
           )}
 
-          {activeSection === 'api' && (
+          {activeSection === 'ledger' && (
             <div className="space-y-4">
               <h3 className="text-xl font-bold font-mono-tech text-[#e5e2e1]">
-                Programmatic Ingestion Specs
+                Sovereign OS: Consolidated Multi-Venture Truth Ledger
               </h3>
               <p>
-                External algorithmic entities can stream state transitions directly via standard WebSocket frames with authentication headers.
+                The central operational orchestration ledger consolidating cash flow, asset governance, and runtime telemetry across MTF, Compliance Labs, and AudioBlue under GriDD Corp capital management.
               </p>
-              <pre className="bg-black/80 p-4 rounded-xl border border-white/10 font-mono-tech text-xs text-[#98cbff] overflow-x-auto">
-{`// Connect to L0 Core WebSocket
-const socket = new WebSocket('wss://api.kaiju-os.internal/v2/stream', {
-  headers: {
-    'Authorization': 'Bearer kj_live_99a8f2c0192e448b11c009d7',
-    'X-Kaiju-Layer': 'L1_EXECUTION'
-  }
-});
-
-socket.on('tick', (payload) => {
-  // Sub-millisecond tick ingest
-  processOrderbookDelta(payload);
-});`}
-              </pre>
+              <div className="p-4 rounded-xl bg-black/40 border border-white/10 font-mono-tech text-xs space-y-2">
+                <span className="text-[#4edea3] font-bold block">DOUBLE-ENTRY ACID ASSURANCE:</span>
+                <p>All financial movements across ventures are recorded with strict double-entry invariants, verified against cryptographic checksums, eliminating reconciliation discrepancies.</p>
+              </div>
             </div>
           )}
         </div>
 
         {/* Footer */}
         <div className="p-4 bg-[#0e0e0e] border-t border-white/10 flex items-center justify-between text-xs font-mono-tech text-[#88919d]">
-          <span>KAIJU_OS // DOCS_VERSION 2.0.4</span>
+          <span>KAIJU_OS // DOCS_VERSION 2.5.0</span>
           <button
             onClick={onClose}
             className="bg-[#98cbff] text-[#003354] px-4 py-1.5 rounded-lg font-bold hover:bg-[#cfe5ff] transition-all cursor-pointer"

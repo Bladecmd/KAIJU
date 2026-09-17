@@ -14,44 +14,44 @@ export const ArchitectureModal: React.FC<ArchitectureModalProps> = ({
 
   const layers = [
     {
-      level: 'L0_CORE',
-      name: 'EXECUTIVE KERNEL & CONTROL PLANE',
+      level: 'L0_EXEC',
+      name: 'EXECUTIVE PRODUCER & STRATEGIC INTENT',
       color: 'border-[#98cbff] bg-[#98cbff]/5 text-[#98cbff]',
       description:
-        'State reconciliation engine and master synchronization loop. Dispatches macro execution mandates and maintains strict delta-neutral risk envelopes.',
-      tech: ['Rust Kernel', 'Deterministic State Ring', 'Low-Jitter IPC'],
+        'Human systems architect (Blade) establishes domain models, operational objectives, safety perimeters, unit economics, and state machine constraints.',
+      tech: ['Systems Architecture', 'FinOps Margins', 'Boundary Definitions'],
     },
     {
-      level: 'L1_AUTO',
-      name: 'AUTONOMOUS EXECUTION PIPELINES',
+      level: 'L1_COGNITIVE',
+      name: 'NOVA COGNITIVE & ATTENTION ORCHESTRATION',
       color: 'border-[#4edea3] bg-[#4edea3]/5 text-[#4edea3]',
       description:
-        'Sub-millisecond smart order routing, statistical arbitrage hunters, and automated dynamic hedging options collars with sub-1ms execution.',
-      tech: ['FPGA Accelerated', 'C++ Market Ingestion', 'Direct Co-Location'],
+        'Context assembly, tiered memory retrieval, multi-agent dispatch, and token economy optimizer. Operates with strict degraded-mode safety envelopes.',
+      tech: ['Model Gateway', 'Episodic Memory', 'Context Compaction'],
     },
     {
-      level: 'L2_DATA',
-      name: 'GLOBAL LOW-LATENCY SENSOR RADAR',
-      color: 'border-[#cfe5ff] bg-[#cfe5ff]/5 text-[#cfe5ff]',
-      description:
-        'Direct exchange cross-connects situated across Tokyo (TY3), New York (NY4), London (LD4), Frankfurt (FR2), and Singapore (SG1).',
-      tech: ['Dark Fiber Relays', 'Solarflare OpenOnload', 'Kernel Bypass UDP'],
-    },
-    {
-      level: 'L3_FLOW',
-      name: 'ZERO-KNOWLEDGE SETTLEMENT & STDOUT RING',
-      color: 'border-[#8f92ff] bg-[#8f92ff]/5 text-[#8f92ff]',
-      description:
-        'Cryptographic batch settlement with succinct zero-knowledge proofs. Real-time audit trails and high-throughput memory-mapped ring logging.',
-      tech: ['ZK-SNARK Prover', 'Ring Buffer stdout', 'Immutable Telemetry Log'],
-    },
-    {
-      level: 'L4_USER',
-      name: 'CRYPTOGRAPHIC ACCESS & HARDWARE AUTH',
+      level: 'L2_SECURITY',
+      name: 'SOVEREIGN DEFENSIVE & ZERO-TRUST GATEWAY',
       color: 'border-[#ffb4ab] bg-[#ffb4ab]/5 text-[#ffb4ab]',
       description:
-        'Executive superuser verification via FIDO2 hardware tokens and ED25519 multi-signature quorum for structural parameter changes.',
-      tech: ['FIDO2 Security Key', 'ED25519 Curve', 'Multi-Party Quorum'],
+        'Prompt injection firewalls, egress token sanitizers, HMAC authentication, V8 isolate sandboxing, and immutable tamper-evident audit logging.',
+      tech: ['Zero-Trust Egress', 'Threat Sanitizers', 'Hardware FIDO2 Quorum'],
+    },
+    {
+      level: 'L3_VENTURES',
+      name: 'MULTI-VENTURE OPERATIONAL RUNTIMES',
+      color: 'border-[#cfe5ff] bg-[#cfe5ff]/5 text-[#cfe5ff]',
+      description:
+        'Autonomous venture engines: Metro Task Force (emergency drainage dispatch & pricing), Compliance Labs (brokerage checks), and AudioBlue (DSP pipelines).',
+      tech: ['PostgreSQL ACID Ledger', 'Fastify / Node.js', 'Redis State Engine'],
+    },
+    {
+      level: 'L4_SOVEREIGN_OS',
+      name: 'SOVEREIGN OS CENTRAL TRUTH LEDGER & GOVERNANCE',
+      color: 'border-[#8f92ff] bg-[#8f92ff]/5 text-[#8f92ff]',
+      description:
+        'Consolidated cross-venture ledger, telemetry aggregation, cash flow attribution, and GriDD Corp legal/capital asset governance.',
+      tech: ['Truth Ledger', 'Merkle Audit Root', 'Double-Entry Accounting'],
     },
   ];
 
@@ -77,7 +77,7 @@ export const ArchitectureModal: React.FC<ArchitectureModalProps> = ({
                 SYSTEMS_ARCHITECTURE_BLUEPRINT
               </h2>
               <p className="text-xs text-[#88919d] font-mono-tech">
-                KAIJU_OS // 5-LAYER EXECUTIVE STACK
+                SOVEREIGN ECOSYSTEM // 5-TIER AUTONOMOUS STACK
               </p>
             </div>
           </div>
@@ -96,7 +96,7 @@ export const ArchitectureModal: React.FC<ArchitectureModalProps> = ({
             <span className="text-[#98cbff] font-bold font-mono-tech block mb-1">
               ARCHITECTURAL THESIS:
             </span>
-            KAIJU OS is structured around strict separation of concerns across 5 discrete, fault-isolated tiers. By isolating executive risk enforcement (L0) from low-level high-frequency socket routines (L2), the system guarantees sub-millisecond execution without risking systemic capital contagion.
+            The Sovereign Ecosystem is architected around strict separation of concerns across 5 discrete, fault-isolated tiers. Strategic intent and boundaries originate with the human producer (L0), orchestrated through cognitive reasoning (L1 NOVA) and defensive firewalls (L2 Sovereign Security), executing in real-world venture runtimes (L3 MTF / Compliance Labs), and settling into an immutable cross-venture Truth Ledger (L4 Sovereign OS).
           </div>
 
           {/* Layer Cards */}

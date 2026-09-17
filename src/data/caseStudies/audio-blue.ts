@@ -7,9 +7,9 @@ export const audioBlueCaseStudy: CaseStudyData = {
   // 01 - PROJECT IDENTITY
   identity: {
     projectName: 'AudioBlue',
-    projectType: 'Ultra Low-Latency Voice Streaming & DSP Processing Pipeline',
-    status: 'STABLE_CORE (High-Throughput Audio Engine)',
-    myRole: 'Founder, Audio Systems Architect & AI Orchestrator',
+    projectType: 'Subscription Audio Media Platform & Low-Latency DSP Pipeline',
+    status: 'DEVELOPMENT (Audio Media & DSP Architecture)',
+    myRole: 'Founder, Audio Systems Architect & Technical Builder',
     technologyStack: [
       'WebAssembly (Rust / C++)',
       'WebRTC / Opus Codec',

@@ -7,9 +7,9 @@ export const metroTaskForceCaseStudy: CaseStudyData = {
   // 01 - PROJECT IDENTITY
   identity: {
     projectName: 'Metro Task Force',
-    projectType: 'Autonomous Field Service Dispatch & Financial Escrow Engine',
-    status: 'PRODUCTION (Active Operations)',
-    myRole: 'Founder, Product Architect, Systems Designer & AI Orchestrator',
+    projectType: 'Operational Field Service Platform, Emergency Pricing & Dispatch Engine',
+    status: 'LIVE (Operational Field Service Business)',
+    myRole: 'Founder, Product Architect, Systems Designer & Technical Operator',
     technologyStack: [
       'Node.js (Fastify)',
       'TypeScript 5.8',
