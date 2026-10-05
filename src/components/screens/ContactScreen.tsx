@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ScreenId } from '../../types';
 import { analytics } from '../../services/analytics';
+import { opportunityService } from '../../services/opportunityService';
 import {
   Mail,
   Calendar,
@@ -25,6 +26,7 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ onAddLog }) => {
   const [formName, setFormName] = useState('');
   const [formEmail, setFormEmail] = useState('');
   const [formCompany, setFormCompany] = useState('');
+  const [formRoleInterest, setFormRoleInterest] = useState('');
   const [formMessage, setFormMessage] = useState('');
   const [formSent, setFormSent] = useState(false);
 
@@ -40,9 +42,20 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ onAddLog }) => {
     e.preventDefault();
     if (!formName || !formEmail || !formMessage) return;
 
+    const utm = analytics.getUTM();
+    // Register opportunity in pipeline inbox
+    opportunityService.addOpportunity({
+      contactName: formName,
+      contactEmail: formEmail,
+      company: formCompany || undefined,
+      roleInterest: formRoleInterest || undefined,
+      message: formMessage,
+      utm,
+    });
+
     analytics.track('CONTACT_SUBMIT', `Portal Inbound: ${formName} (${formCompany || 'Private'})`);
     onAddLog('NET', `Encrypted message received from ${formName} <${formEmail}>`);
-    onAddLog('OK', 'Inbound pipeline: message queued for executive review.');
+    onAddLog('OK', 'Opportunity Engine: New lead captured into pipeline inbox with full UTM attribution.');
     setFormSent(true);
   };
 
@@ -207,15 +220,34 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ onAddLog }) => {
                   </div>
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-[#8ca3b8] block">Company / Organization / Project</label>
-                  <input
-                    type="text"
-                    value={formCompany}
-                    onChange={(e) => setFormCompany(e.target.value)}
-                    placeholder="e.g. Acme AI Systems"
-                    className="w-full rounded-xl border border-[#223142] bg-[#080d14] p-3 text-white placeholder-[#455768] outline-none focus:border-[#98cbff]"
-                  />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="text-[#8ca3b8] block">Company / Organization / Project</label>
+                    <input
+                      type="text"
+                      value={formCompany}
+                      onChange={(e) => setFormCompany(e.target.value)}
+                      placeholder="e.g. Acme AI Systems"
+                      className="w-full rounded-xl border border-[#223142] bg-[#080d14] p-3 text-white placeholder-[#455768] outline-none focus:border-[#98cbff]"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-[#8ca3b8] block">Opportunity Nature / Role Focus</label>
+                    <select
+                      value={formRoleInterest}
+                      onChange={(e) => setFormRoleInterest(e.target.value)}
+                      className="w-full rounded-xl border border-[#223142] bg-[#080d14] p-3 text-white outline-none focus:border-[#98cbff]"
+                    >
+                      <option value="">Select Opportunity Type...</option>
+                      <option value="Full-Time Engineering / Architecture">Full-Time Engineering / Architecture</option>
+                      <option value="AI & Automation Solutions">AI & Automation Solutions</option>
+                      <option value="Fractional CTO / Technical Ops">Fractional CTO / Technical Ops</option>
+                      <option value="Commercial Advisory / FinOps">Commercial Advisory / FinOps</option>
+                      <option value="Custom System Architecture Build">Custom System Architecture Build</option>
+                      <option value="General Conversation / Intro">General Conversation / Intro</option>
+                    </select>
+                  </div>
                 </div>
 
                 <div className="space-y-1.5">

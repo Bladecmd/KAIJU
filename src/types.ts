@@ -506,6 +506,109 @@ export interface AnalyticsSummary {
 }
 
 // -------------------------------------------------------------
+// 6B. GOOGLE SEARCH CONSOLE & BENCHMARK MODELS
+// -------------------------------------------------------------
+export type SearchConsoleStatus = 'CONNECTED' | 'DISCONNECTED' | 'SYNCING' | 'ERROR';
+
+export interface SearchConsoleMetricRow {
+  date: string;
+  clicks: number;
+  impressions: number;
+  ctr: number;
+  position: number;
+}
+
+export interface SearchConsoleQueryRow {
+  query: string;
+  clicks: number;
+  impressions: number;
+  ctr: number;
+  position: number;
+  relevance: 'TARGET_ROLE' | 'SYSTEM_BRAND' | 'TECHNICAL_TOPIC' | 'GENERAL';
+}
+
+export interface SearchConsolePageRow {
+  page: string;
+  clicks: number;
+  impressions: number;
+  ctr: number;
+  position: number;
+}
+
+export interface HistoricalBenchmark {
+  id: string;
+  label: string;
+  period: string;
+  startDate: string;
+  endDate: string;
+  clicks: number;
+  impressions: number;
+  ctr: number;
+  avgPosition: number;
+  status: 'HISTORICAL BENCHMARK';
+  verifiedSource: string;
+  notes: string;
+}
+
+export interface SearchPerformanceData {
+  status: SearchConsoleStatus;
+  siteUrl: string;
+  lastSyncedAt?: string;
+  lastError?: string;
+  dataFreshness: 'LIVE' | 'CACHE' | 'HISTORICAL_ONLY' | 'NOT_CONFIGURED';
+  dateRange: '7d' | '28d' | '3m' | '6m' | '12m';
+  metrics: SearchConsoleMetricRow[];
+  topQueries: SearchConsoleQueryRow[];
+  topPages: SearchConsolePageRow[];
+  summary: {
+    totalClicks: number;
+    totalImpressions: number;
+    averageCtr: number;
+    averagePosition: number;
+  };
+  benchmark: HistoricalBenchmark;
+}
+
+// -------------------------------------------------------------
+// 6C. OPPORTUNITY ENGINE & PIPELINE INBOX
+// -------------------------------------------------------------
+export type OpportunityStage =
+  | 'NEW'
+  | 'CONTACTED'
+  | 'CONVERSATION'
+  | 'INTERVIEW'
+  | 'DISCOVERY'
+  | 'PROPOSAL'
+  | 'WON'
+  | 'LOST';
+
+export type OpportunitySource =
+  | 'ORGANIC_SEARCH'
+  | 'LINKEDIN'
+  | 'GITHUB'
+  | 'DIRECT_OUTREACH'
+  | 'REFERRAL'
+  | 'TECHNICAL_BRIEF'
+  | 'UNKNOWN';
+
+export interface OpportunityItem {
+  id: string;
+  contactName: string;
+  contactEmail: string;
+  company?: string;
+  roleInterest?: string;
+  message: string;
+  stage: OpportunityStage;
+  source: OpportunitySource;
+  estimatedValue?: string;
+  createdAt: string;
+  updatedAt: string;
+  utm?: UTMParameters;
+  notes?: string[];
+  archived?: boolean;
+}
+
+// -------------------------------------------------------------
 // 7. LEGACY / TELEMETRY INTERFACES
 // -------------------------------------------------------------
 export interface AutomationNode {
