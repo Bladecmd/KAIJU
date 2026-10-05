@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a121c"/>
+      <stop offset="100%" stop-color="#04070b"/>
+    </linearGradient>
+
+    <!-- Cyan / Emerald High-Voltage Gradient -->
+    <linearGradient id="cyberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#98cbff"/>
+      <stop offset="50%" stop-color="#5fa8ff"/>
+      <stop offset="100%" stop-color="#4edea3"/>
+    </linearGradient>
+
+    <!-- Subtle Glow Filter -->
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Dark Rounded Chassis -->
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#bgGrad)" stroke="#1e2d3d" stroke-width="2"/>
+
+  <!-- Subtle Cybernetic Grid / Corner Accents -->
+  <path d="M 8 16 L 8 8 L 16 8" stroke="#98cbff" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M 48 8 L 56 8 L 56 16" stroke="#98cbff" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M 56 48 L 56 56 L 48 56" stroke="#4edea3" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M 16 56 L 8 56 L 8 48" stroke="#4edea3" stroke-width="1.5" fill="none" opacity="0.4"/>
+
+  <!-- Central Kaiju 'K' Monogram (Angular, Precision-Machined) -->
+  <g filter="url(#neonGlow)">
+    <!-- Vertical Pillar -->
+    <path d="M 19 15 L 26 15 L 26 49 L 19 49 Z" fill="url(#cyberGrad)"/>
+
+    <!-- Upper Angular Diagonal Arm -->
+    <path d="M 28 32 L 40 15 L 48 15 L 34 34 Z" fill="url(#cyberGrad)"/>
+
+    <!-- Lower Angular Diagonal Arm -->
+    <path d="M 32 30 L 48 49 L 40 49 L 26 36 Z" fill="url(#cyberGrad)"/>
+
+    <!-- Active Core Power Dot -->
+    <circle cx="48" cy="18" r="2.5" fill="#4edea3"/>
+  </g>
+</svg>
