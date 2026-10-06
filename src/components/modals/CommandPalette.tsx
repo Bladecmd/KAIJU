@@ -136,23 +136,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       },
     },
     {
-      id: 'nav-analytics',
-      category: 'NAVIGATION',
-      label: 'Platform Analytics & Recruiter Telemetry',
-      sublabel: 'L6_METR: Privacy-preserving local metrics, time-on-site, and conversion funnel',
-      shortcut: '7',
-      icon: <Activity className="w-4 h-4 text-[#4edea3]" />,
-      perform: () => {
-        onSelectScreen('ANALYTICS');
-        onClose();
-      },
-    },
-    {
       id: 'nav-github',
       category: 'NAVIGATION',
       label: 'Public GitHub Repositories',
-      sublabel: 'L7_REPO: Clean, typed source code repositories and verifiable builds',
-      shortcut: '8',
+      sublabel: 'L6_REPO: Clean, typed source code repositories and verifiable builds',
+      shortcut: '7',
       icon: <Github className="w-4 h-4 text-[#98cbff]" />,
       perform: () => {
         onSelectScreen('GITHUB');
@@ -163,8 +151,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       id: 'nav-contact',
       category: 'NAVIGATION',
       label: 'Initiate Contact & Engineering Inbound',
-      sublabel: 'L8_COMM: Direct email copy and encrypted message portal',
-      shortcut: '9',
+      sublabel: 'L7_COMM: Direct email copy and encrypted message portal',
+      shortcut: '8',
       icon: <Mail className="w-4 h-4 text-[#4edea3]" />,
       perform: () => {
         onSelectScreen('CONTACT');

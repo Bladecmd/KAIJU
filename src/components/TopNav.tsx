@@ -43,7 +43,6 @@ export const TopNav: React.FC<TopNavProps> = ({
     { id: 'ARCHITECTURE', label: 'ARCHITECTURE' },
     { id: 'SKILLS', label: 'WHERE I FIT' },
     { id: 'EXPERIENCE', label: 'TRACK RECORD & CV' },
-    { id: 'ANALYTICS', label: 'ANALYTICS' },
     { id: 'GITHUB', label: 'GITHUB' },
     { id: 'CONTACT', label: 'CONVERSATION' },
   ];

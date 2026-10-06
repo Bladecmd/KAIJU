@@ -74,20 +74,14 @@ export const SideNav: React.FC<SideNavProps> = ({
       icon: <GraduationCap className="w-4 h-4 shrink-0" />,
     },
     {
-      id: 'ANALYTICS',
-      layer: 'L6_METR',
-      label: 'Platform Telemetry',
-      icon: <Activity className="w-4 h-4 shrink-0" />,
-    },
-    {
       id: 'GITHUB',
-      layer: 'L7_REPO',
+      layer: 'L6_REPO',
       label: 'Public Repositories',
       icon: <Github className="w-4 h-4 shrink-0" />,
     },
     {
       id: 'CONTACT',
-      layer: 'L8_COMM',
+      layer: 'L7_COMM',
       label: 'Start a Conversation',
       icon: <Mail className="w-4 h-4 shrink-0" />,
     },
